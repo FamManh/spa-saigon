@@ -206,17 +206,17 @@ userSchema.statics = {
     checkDuplicateUsername(error) {
         if (error.name === 'MongoError' && error.code === 11000) {
             return new APIError({
-                message: 'Validation Error',
-                errors: [
-                    {
-                        field: 'username',
-                        location: 'body',
-                        messages: [''username' already exists']
-                    }
-                ],
-                status: httpStatus.CONFLICT,
-                isPublic: true,
-                stack: error.stack
+              message: "Validation Error",
+              errors: [
+                {
+                  field: "username",
+                  location: "body",
+                  messages: ["'username' already exists"]
+                }
+              ],
+              status: httpStatus.CONFLICT,
+              isPublic: true,
+              stack: error.stack
             });
         }
         return error;

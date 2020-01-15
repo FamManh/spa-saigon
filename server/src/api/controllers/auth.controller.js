@@ -12,13 +12,10 @@ const APIError = require('../utils/APIError');
  * @private
  */
 function generateTokenResponse(user, accessToken) {
-  const tokenType = 'Bearer';
-  const refreshToken = RefreshToken.generate(user).token;
+  // const refreshToken = RefreshToken.generate(user).token;
   const expiresIn = moment().add(jwtExpirationInterval, 'minutes');
   return {
-    tokenType,
     accessToken,
-    refreshToken,
     expiresIn,
   };
 }
@@ -46,6 +43,7 @@ exports.register = async (req, res, next) => {
  */
 exports.login = async (req, res, next) => {
   try {
+    console.log('body: ' + req.body); 
     const { user, accessToken } = await User.findAndGenerateToken(req.body);
     const token = generateTokenResponse(user, accessToken);
     const userTransformed = user.transform();
