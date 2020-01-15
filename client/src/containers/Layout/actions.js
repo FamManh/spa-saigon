@@ -20,6 +20,11 @@ const actions = {
         return {
             type: MENU_HIDE
         };
+    },
+
+    doSignout: () => {
+        window.localStorage.removeItem("ssauth");
+        getHistory().push("/signin");
     }
 };
 export default actions;
