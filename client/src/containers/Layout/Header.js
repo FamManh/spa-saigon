@@ -10,7 +10,7 @@ const { Header: AntHeader } = Layout;
 const Header = () => {
   const dispatch = useDispatch();
   let doSignout = () => {
-    // dispatch(actions.doSignout());
+    actions.doSignout();
   };
 
   let doNavigateToProfile = () => {
