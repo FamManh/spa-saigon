@@ -1,6 +1,6 @@
 {
   "name": "spa-saigon-server",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "API Spa Saigon",
   "author": "Manh Pham",
   "main": "src/index.js",
