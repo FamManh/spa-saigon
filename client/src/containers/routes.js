@@ -57,8 +57,27 @@ const publicRoutes = [
 ];
 
 const errorRoutes = [
-
-]
+    {
+        path: "/401",
+        exact: true,
+        loader: () => import("./shared/error/Error401Page")
+    },
+    {
+        path: "/403",
+        exact: true,
+        loader: () => import("./shared/error/Error403Page")
+    },
+    {
+        path: "/404",
+        exact: true,
+        loader: () => import("./shared/error/Error404Page")
+    },
+    {
+        path: "/500",
+        exact: true,
+        loader: () => import("./shared/error/Error500Page")
+    }
+];
 
 export default {
     privateRoutes, 

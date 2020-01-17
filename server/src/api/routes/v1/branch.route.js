@@ -1,7 +1,7 @@
 const express = require("express");
 const validate = require("express-validation");
 const controller = require("../../controllers/branch.controller");
-const { authorize, ADMIN, LOGGED_USER } = require("../../middlewares/auth");
+const { authorize, ADMIN, SUPERADMIN, LOGGED_USER } = require("../../middlewares/auth");
 // const {
 //   listBranchs,
 //   createBranch,
@@ -142,7 +142,7 @@ router
    * @apiError (Forbidden 403)    Forbidden    Only branch with same id or admins can modify the data
    * @apiError (Not Found 404)    NotFound     Branch does not exist
    */
-  .patch(authorize(LOGGED_USER), /* validate(updateBranch), */ controller.update)
+  .patch(authorize(ADMIN), /* validate(updateBranch), */ controller.update)
   /**
    * @api {patch} v1/branchs/:id Delete Branch
    * @apiDescription Delete a branch
@@ -159,6 +159,6 @@ router
    * @apiError (Forbidden 403)    Forbidden     Only branch with same id or admins can delete the data
    * @apiError (Not Found 404)    NotFound      Branch does not exist
    */
-  .delete(authorize(LOGGED_USER), controller.remove);
+  .delete(authorize(ADMIN), controller.remove);
 
 module.exports = router;

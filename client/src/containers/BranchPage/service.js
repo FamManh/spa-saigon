@@ -6,7 +6,7 @@ const services = {
         return response;
     },
 
-    findFn: async (_id) => {
+    findFn: async _id => {
         const response = await sgapi.get(`/branch/${_id}`);
         return response;
     },

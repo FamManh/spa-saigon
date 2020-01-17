@@ -2,8 +2,8 @@ import {
     BRANCH_GET_START,
     BRANCH_GET_SUCCESS,
     BRANCH_GET_ERROR,
-    ERROR_MESSAGE_CLEAR,
-    TABLE_ROW_SELECTION,
+    BRANCH_ERROR_MESSAGE_CLEAR,
+    BRANCH_TABLE_ROW_SELECTION,
     BRANCH_DESTROY_START,
     BRANCH_DESTROY_SUCCESS,
     BRANCH_DESTROY_ERROR,
@@ -16,7 +16,7 @@ import {
     BRANCH_FIND_START,
     BRANCH_FIND_SUCCESS,
     BRANCH_FIND_ERROR,
-    TABLE_ROW_CLICK
+    BRANCH_TABLE_ROW_CLICK
 } from "./constants";
 import produce from "immer";
 const initialState = {
@@ -36,18 +36,18 @@ const initialState = {
 const branchReducer = (state = initialState, { type, payload }) =>
     produce(state, draft => {
         switch (type) {
-            case ERROR_MESSAGE_CLEAR:
+            case BRANCH_ERROR_MESSAGE_CLEAR:
                 draft.error = null;
                 break;
-            case TABLE_ROW_SELECTION:
+            case BRANCH_TABLE_ROW_SELECTION:
                 draft.selectedRowKeys = payload.selectedRowKeys;
                 draft.selectedRows = payload.selectedRows;
                 break;
-            case TABLE_ROW_CLICK:
+            case BRANCH_TABLE_ROW_CLICK:
                 // check includes key
                 console.log(payload);
                 if (state.selectedRowKeys.includes(payload.selectedRowKey)) {
-                    console.log('true');
+                    console.log("true");
                     draft.selectedRowKeys = state.selectedRowKeys.filter(
                         key => key !== payload.selectedRowKey
                     );
@@ -81,6 +81,8 @@ const branchReducer = (state = initialState, { type, payload }) =>
                 draft.branchs = state.branchs.filter(
                     branch => branch.id !== payload
                 );
+                draft.selectedRowKeys = [];
+                draft.selectedRows = [];
                 draft.error = null;
                 break;
             case BRANCH_DESTROY_ERROR:
