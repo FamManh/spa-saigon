@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Checkbox, Form, Input, Typography, Row } from "antd";
+import { Button, Form, Input, Typography, Row } from "antd";
 import { Eye, Mail, Triangle } from "react-feather";
 import { Link } from "react-router-dom";
 import styled from "styled-components";

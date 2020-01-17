@@ -6,6 +6,7 @@ import {
 } from "./constants";
 import { getHistory } from "../configureStore";
 import { fetchSignin } from "./service";
+import Errors from "../shared/error/errors";
 
 const actions = {
     doClearErrorMessage: () => {
@@ -25,7 +26,10 @@ const actions = {
             dispatch({ type: SIGNIN_SUCCESS, payload: response.data });
             getHistory().push("/");
         }catch(error){
-            console.log(error);
+             Errors.handle(error);
+             dispatch({
+                 type: SIGNIN_ERROR
+             });
         }
     }
 };

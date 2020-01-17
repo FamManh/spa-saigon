@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Toolbar from "../../shared/styles/Toolbar";
 import { Button, Tooltip, Popconfirm } from "antd";
 import {useSelector, useDispatch} from 'react-redux';

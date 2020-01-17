@@ -1,5 +1,5 @@
 import { Button, Popconfirm } from "antd";
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Toolbar from "../../shared/styles/Toolbar";
 import selectors from "../selectors";

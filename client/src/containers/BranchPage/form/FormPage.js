@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Layout from "../../Layout";
 import ContentWrapper from "../../Layout/styles/ContentWrapper";
 import PageTitle from "../../shared/styles/PageTitle";

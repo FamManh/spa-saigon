@@ -1,32 +1,31 @@
 import {
-    BRANCH_GET_START,
-    BRANCH_GET_SUCCESS,
-    BRANCH_GET_ERROR,
-    BRANCH_DESTROY_START,
-    BRANCH_DESTROY_SUCCESS,
-    BRANCH_DESTROY_ERROR,
     BRANCH_CREATE_START,
     BRANCH_CREATE_SUCCESS,
     BRANCH_CREATE_ERROR,
+    BRANCH_GET_START,
+    BRANCH_GET_SUCCESS,
+    BRANCH_GET_ERROR,
     BRANCH_UPDATE_START,
     BRANCH_UPDATE_SUCCESS,
     BRANCH_UPDATE_ERROR,
-    BRANCH_ERROR_MESSAGE_CLEAR,
+    BRANCH_DESTROY_START,
+    BRANCH_DESTROY_SUCCESS,
+    BRANCH_DESTROY_ERROR,
     BRANCH_FIND_START,
     BRANCH_FIND_SUCCESS,
     BRANCH_FIND_ERROR,
-    BRANCH_TABLE_ROW_SELECTION,
-    BRANCH_TABLE_ROW_CLICK,
     BRANCH_EXPORT_START,
     BRANCH_EXPORT_SUCCESS,
-    BRANCH_EXPORT_ERROR
+    BRANCH_EXPORT_ERROR,
+    BRANCH_ERROR_MESSAGE_CLEAR,
+    BRANCH_TABLE_ROW_SELECTION,
+    BRANCH_TABLE_ROW_CLICK
 } from "./constants";
 import { getHistory } from "../configureStore";
 import Message from "../shared/message";
 import Errors from "../shared/error/errors";
 
 import services from "./service";
-import selectors from "./selectors";
 import { Excel } from "../shared/excel/excel";
 
 const messageUpdateSuccess = "Cập nhật chi nhánh thành công.";
