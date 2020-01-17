@@ -6,19 +6,20 @@ import Menu from "./Menu";
 const { Content } = AntLayout;
 
 const Layout = WrappedComponent => class extends Component {
+    
     render() {
       return (
-        <LayoutWrapper>
-          <Menu url={this.props.match.url} />
+          <LayoutWrapper>
+              <Menu url={this.props.match.url} />
 
-          <AntLayout>
-            <Header />
+              <AntLayout>
+                  <Header />
 
-            <Content>
-              <WrappedComponent {...this.props} />
-            </Content>
-          </AntLayout>
-        </LayoutWrapper>
+                  <Content>
+                      <WrappedComponent {...this.props} />
+                  </Content>
+              </AntLayout>
+          </LayoutWrapper>
       );
     }}
 

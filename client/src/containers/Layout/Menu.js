@@ -45,11 +45,12 @@ const Menu = ({ url }) => {
 
     let getSelectedKeys = () => {
         const match = routes.privateRoutes.find(option => {
-            if (option.menu.exact) {
-                return setSelectedKeys(url);
-            }
+            // if (option.menu.exact) {
+            //     return setSelectedKeys(url);
+            // }
+            return setSelectedKeys([url]);
 
-            return setSelectedKeys(url.startsWith(option.path));
+            // return setSelectedKeys(url.startsWith(option.path));
         });
 
         if (match) {
@@ -74,7 +75,6 @@ const Menu = ({ url }) => {
             window.removeEventListener("resize", toggleMenuOnResize);
         };
     }, []);
-    console.log(selectedKeys);
     return (
         <SiderWrapper
             style={{
@@ -85,7 +85,7 @@ const Menu = ({ url }) => {
         >
             <Sider theme="light" trigger={null}>
                 <div className="logo">
-                    <h2>Spa Saigon</h2>
+                    <h2>Saigon</h2>
                 </div>
 
                 <AntMenu
@@ -95,11 +95,11 @@ const Menu = ({ url }) => {
                 >
                     {routes.privateRoutes
                         .filter(privateRoute => !!privateRoute.menu)
-                        .map(privateRoute => (
-                            <AntMenu.Item key={privateRoute.path}>
-                                <Link to={privateRoute.path}>
-                                    <Icon type={privateRoute.icon} />
-                                    <span>{privateRoute.label}</span>
+                        .map(route => (
+                            <AntMenu.Item key={route.path}>
+                                <Link to={route.path}>
+                                    <Icon type={route.icon} />
+                                    <span>{route.label}</span>
                                 </Link>
                             </AntMenu.Item>
                         ))}

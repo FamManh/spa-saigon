@@ -1,10 +1,21 @@
 import axios from "axios";
-import {isAuthenticated} from '../containers/shared/routes/permissionChecker';
+import { isAuthenticated } from "../containers/shared/routes/permissionChecker";
 
-export default axios.create({
-    baseURL: `${process.env.REACT_APP_API_URI}`,
-    headers: {
-        Authorization:
-            `Bearer ${isAuthenticated() ? isAuthenticated() : ''}` 
-    }
+const sgapi = axios.create({
+    baseURL: `${process.env.REACT_APP_API_URI}`
 });
+
+sgapi.interceptors.request.use(
+    config => {
+        if (isAuthenticated()) {
+            config.headers["Authorization"] = "Bearer " + isAuthenticated();
+        }
+        config.headers["Content-Type"] = "application/json";
+        return config;
+    },
+    error => {
+        Promise.reject(error);
+    }
+);
+
+export default sgapi;

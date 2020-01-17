@@ -1,0 +1,8 @@
+# branch ui
+1. Xóa chi nhánh => xóa ở store (không nhất thiết phải load lại từ database)
+2. hand error từ response khi fetch api
+
+----
+Table row click và selection conflict in reducer 
+
+thêm prefix Branch cho table rơ click ...
