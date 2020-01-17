@@ -60,6 +60,14 @@ const FormComp = ({ match, form }) => {
                                 isEditing() && record ? record["name"] : null,
                             rules: [
                                 {
+                                    min: 3,
+                                    message: "Ít nhất 3 kí tự"
+                                },
+                                {
+                                    max: 128,
+                                    message: "Nhiều nhất 128 kí tự"
+                                },
+                                {
                                     required: true,
                                     message: "Vui lòng nhập tên chi nhánh"
                                 }

@@ -15,7 +15,7 @@ const privateRoutes = [
         menu: true,
         label: "Chi nhánh",
         permissionRequired: null,
-        icon: "home"
+        icon: "branches"
     },
     {
         path: "/branch/new",

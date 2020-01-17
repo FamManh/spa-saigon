@@ -44,10 +44,7 @@ const branchReducer = (state = initialState, { type, payload }) =>
                 draft.selectedRows = payload.selectedRows;
                 break;
             case BRANCH_TABLE_ROW_CLICK:
-                // check includes key
-                console.log(payload);
                 if (state.selectedRowKeys.includes(payload.selectedRowKey)) {
-                    console.log("true");
                     draft.selectedRowKeys = state.selectedRowKeys.filter(
                         key => key !== payload.selectedRowKey
                     );
