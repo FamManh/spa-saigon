@@ -39,7 +39,7 @@ router
    * @apiError (Unauthorized 401)  Unauthorized  Only authenticated branchs can access the data
    * @apiError (Forbidden 403)     Forbidden     Only admins can access the data
    */
-  .get(authorize(LOGGED_USER)/*, validate(listBranchs)*/, controller.list)
+  .get(authorize(LOGGED_USER) /*, validate(listBranchs)*/, controller.list)
   /**
    * @api {post} v1/branchs Create Branch
    * @apiDescription Create a new branch

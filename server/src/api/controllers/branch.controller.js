@@ -89,10 +89,11 @@ exports.list = async (req, res, next) => {
  * @public
  */
 exports.remove = (req, res, next) => {
-  const { branch } = req.locals;
-
+  const branch = req.locals.branch;
+  branch.isActive = false;
+  
   branch
-    .remove()
-    .then(() => res.status(httpStatus.NO_CONTENT).end())
+    .save()
+    .then(savedBranch => res.json(savedBranch.transform()))
     .catch(e => next(e));
 };

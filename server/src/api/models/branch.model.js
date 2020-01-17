@@ -21,6 +21,10 @@ const branchSchema = new mongoose.Schema(
       uppercase: true,
       trim: true,
       unique: true
+    },
+    isActive: {
+      type: Boolean,
+      default: true
     }
   },
     {
@@ -83,12 +87,14 @@ branchSchema.statics = {
    */
   list({ page = 1, perPage = 30, name }) {
     const options = omitBy({ name }, isNil);
-
-    return this.find(options)
-      .sort({ createdAt: -1 })
-    //   .skip(perPage * (page - 1))
-    //   .limit(perPage)
-      .exec();
+    options.isActive = true;
+    return (
+      this.find(options)
+        .sort({ createdAt: -1 })
+        //   .skip(perPage * (page - 1))
+        //   .limit(perPage)
+        .exec()
+    );
   },
 
   /**
