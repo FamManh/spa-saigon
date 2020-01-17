@@ -16,17 +16,25 @@ import {
     BRANCH_FIND_SUCCESS,
     BRANCH_FIND_ERROR,
     BRANCH_TABLE_ROW_SELECTION,
-    BRANCH_TABLE_ROW_CLICK
+    BRANCH_TABLE_ROW_CLICK,
+    BRANCH_EXPORT_START,
+    BRANCH_EXPORT_SUCCESS,
+    BRANCH_EXPORT_ERROR
 } from "./constants";
 import { getHistory } from "../configureStore";
 import Message from "../shared/message";
 import Errors from "../shared/error/errors";
 
 import services from "./service";
+import selectors from "./selectors";
+import { Excel } from "../shared/excel/excel";
 
 const messageUpdateSuccess = "Cập nhật chi nhánh thành công.";
 const messageCreateSuccess = "Tạo chi nhánh thành công.";
 const messageDeleteSuccess = "Xóa chi nhánh thành công.";
+
+const excelHeaderSchema = ["id", "name"];
+
 
 const actions = {
     doClearErrorMessage: () => {
@@ -45,6 +53,17 @@ const actions = {
             dispatch({
                 type: BRANCH_GET_ERROR
             });
+        }
+    },
+
+    doExport: data => dispatch => {
+        try {
+            dispatch({ type: BRANCH_EXPORT_START });
+            Excel.exportAsExcelFile(data, excelHeaderSchema, "demo");
+            dispatch({ type: BRANCH_EXPORT_SUCCESS });
+        } catch (error) {
+            console.log(error);
+            dispatch({ type: BRANCH_EXPORT_ERROR });
         }
     },
 

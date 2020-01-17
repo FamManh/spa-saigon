@@ -16,7 +16,10 @@ import {
     BRANCH_FIND_START,
     BRANCH_FIND_SUCCESS,
     BRANCH_FIND_ERROR,
-    BRANCH_TABLE_ROW_CLICK
+    BRANCH_TABLE_ROW_CLICK,
+    BRANCH_EXPORT_START,
+    BRANCH_EXPORT_SUCCESS,
+    BRANCH_EXPORT_ERROR
 } from "./constants";
 import produce from "immer";
 const initialState = {
@@ -25,6 +28,7 @@ const initialState = {
     findLoading: false,
     saveLoading: false,
     destroyLoading: false,
+    exportLoading: false,
     error: null,
     redirectTo: "/branch",
     selectedRowKeys: [],
@@ -124,6 +128,18 @@ const branchReducer = (state = initialState, { type, payload }) =>
                 break;
             case BRANCH_FIND_ERROR:
                 draft.findLoading = false;
+                draft.error = payload;
+                break;
+            case BRANCH_EXPORT_START:
+                draft.exportLoading = true;
+                draft.error = null;
+                break;
+            case BRANCH_EXPORT_SUCCESS:
+                draft.exportLoading = false;
+                draft.error = null;
+                break;
+            case BRANCH_EXPORT_ERROR:
+                draft.exportLoading = false;
                 draft.error = payload;
                 break;
             default:

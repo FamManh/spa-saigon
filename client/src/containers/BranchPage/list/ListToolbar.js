@@ -9,12 +9,13 @@ import { Link } from "react-router-dom";
 const  ListToolbar = () => {
     const destroyLoading = useSelector(selectors.selectDestroyLoading);
     const dataLoading = useSelector(selectors.selectDataLoading);
+    const exportLoading = useSelector(selectors.selectExportLoading);
     const selectedRowKeys = useSelector(selectors.selectSelectedRowKeys);
+    const branchs = useSelector(selectors.selectBranchs);
 
     const dispatch = useDispatch();
     let doExport = () => {
-        // const { dispatch } = this.props;
-        // dispatch(actions.doExport());
+        dispatch(actions.doExport(branchs));
     };
 
     let doDestroyAllSelected = () => {
@@ -22,30 +23,29 @@ const  ListToolbar = () => {
     };
 
     let renderExportButton = () => {
-        // const { hasRows, loading, exportLoading } = this.props;
 
-        // const disabled = !hasRows || loading;
+        const disabled = !branchs || dataLoading;
 
-        // const button = (
-        //     <Button
-        //         disabled={disabled}
-        //         icon="file-excel"
-        //         onClick={this.doExport}
-        //         loading={exportLoading}
-        //     >
-        //         {i18n("common.export")}
-        //     </Button>
-        // );
+        const button = (
+            <Button
+                disabled={disabled}
+                icon="file-excel"
+                onClick={doExport}
+                loading={exportLoading}
+            >
+                Export to Excel
+            </Button>
+        );
 
-        // if (disabled) {
-        //     return (
-        //         <Tooltip title={i18n("common.noDataToExport")}>
-        //             {button}
-        //         </Tooltip>
-        //     );
-        // }
+        if (disabled) {
+            return (
+                <Tooltip title="Không có dữ liệu">
+                    {button}
+                </Tooltip>
+            );
+        }
 
-        // return button;
+        return button;
     }
 
     let renderDestroyButton = () => {
@@ -84,7 +84,7 @@ const  ListToolbar = () => {
         return buttonWithConfirm;
     }
 
-    let onReload = () => {
+    const onReload = () => {
         dispatch(actions.list());
     }
 
@@ -103,11 +103,11 @@ const  ListToolbar = () => {
 
             {renderDestroyButton()}
 
-            <Button type="primary" onClick={()=>onReload()} icon="reload">
+            <Button type="primary" onClick={() => onReload()} icon="reload">
                 Tải lại
             </Button>
 
-            {/* {this.renderExportButton()} */}
+            {renderExportButton()}
         </Toolbar>
     );
 }
