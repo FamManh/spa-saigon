@@ -12,7 +12,7 @@ const ListPage = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(actions.list());
-    }, [])
+    },[])
     return (
         <React.Fragment>
             <Breadcrumb items={[["Trang chủ", "/"], ["Chi nhánh"]]} />
@@ -21,7 +21,6 @@ const ListPage = () => {
                 <PageTitle>Chi nhánh</PageTitle>
 
                 <ListToolbar />
-                {/* {/* <PetListFilter /> */}
                 <ListTable/>
             </ContentWrapper>
         </React.Fragment>

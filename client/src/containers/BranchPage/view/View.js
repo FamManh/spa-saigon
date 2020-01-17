@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Spinner from "../../shared/Spinner";
 import ViewWrapper from "../../shared/styles/ViewWrapper";
 import TextViewItem from "../../shared/view/TextViewItem";

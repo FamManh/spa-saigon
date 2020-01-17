@@ -1,7 +1,7 @@
 import { Table, Popconfirm } from "antd";
 import actions from "../actions";
 import selectors from "../selectors";
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import TableWrapper from "../../shared/styles/TableWrapper";
 import ButtonLink from "../../shared/styles/ButtonLink";

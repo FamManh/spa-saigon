@@ -11,26 +11,6 @@ const { Sider } = AntLayout;
 const Menu = ({ url }) => {
     const dispatch = useDispatch();
     const [selectedKeys, setSelectedKeys] = useState(null);
-    // constructor(props) {
-    //   super(props);
-    //   this.state = { width: 0, height: 0 };
-    // }
-
-    // componentDidMount() {
-    //   this.toggleMenuOnResize();
-    //   window.addEventListener(
-    //     'resize',
-    //     this.toggleMenuOnResize,
-    //   );
-    // }
-
-    // componentWillUnmount() {
-    //   window.removeEventListener(
-    //     'resize',
-    //     this.toggleMenuOnResize,
-    //   );
-    // }
-
     let hideMenu = () => {
         dispatch(actions.doHideMenu());
     };
@@ -45,12 +25,7 @@ const Menu = ({ url }) => {
 
     let getSelectedKeys = () => {
         const match = routes.privateRoutes.find(option => {
-            // if (option.menu.exact) {
-            //     return setSelectedKeys(url);
-            // }
             return setSelectedKeys([url]);
-
-            // return setSelectedKeys(url.startsWith(option.path));
         });
 
         if (match) {
@@ -60,13 +35,6 @@ const Menu = ({ url }) => {
         return null;
     };
 
-    let match = permission => {
-        // const permissionChecker = new PermissionChecker(
-        //   this.props.currentUser,
-        // );
-        // return permissionChecker.match(permission);
-    };
-
     useEffect(() => {
         toggleMenuOnResize();
         window.addEventListener("resize", toggleMenuOnResize);
@@ -74,7 +42,7 @@ const Menu = ({ url }) => {
         return () => {
             window.removeEventListener("resize", toggleMenuOnResize);
         };
-    }, []);
+    },[]);
     return (
         <SiderWrapper
             style={{

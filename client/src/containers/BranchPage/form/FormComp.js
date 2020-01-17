@@ -8,8 +8,6 @@ import FormWrapper, {
     formItemLayout
 } from "../../shared/styles/FormWrapper";
 import { useSelector, useDispatch } from "react-redux";
-import { getHistory } from "../../configureStore";
-import { Link } from "react-router-dom";
 const FormComp = ({ match, form }) => {
     const dispatch = useDispatch();
     const saveLoading = useSelector(selectors.selectSaveLoading);
@@ -31,7 +29,7 @@ const FormComp = ({ match, form }) => {
         if (isEditing()) {
             dispatch(actions.doFind(match.params.id));
         }
-    }, []);
+    },[]);
 
     let renderForm = () => {
         return (
