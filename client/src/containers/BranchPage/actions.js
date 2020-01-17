@@ -11,15 +11,16 @@ import {
     BRANCH_UPDATE_START,
     BRANCH_UPDATE_SUCCESS,
     BRANCH_UPDATE_ERROR,
-    ERROR_MESSAGE_CLEAR,
+    BRANCH_ERROR_MESSAGE_CLEAR,
     BRANCH_FIND_START,
     BRANCH_FIND_SUCCESS,
     BRANCH_FIND_ERROR,
-    TABLE_ROW_SELECTION,
-    TABLE_ROW_CLICK
+    BRANCH_TABLE_ROW_SELECTION,
+    BRANCH_TABLE_ROW_CLICK
 } from "./constants";
 import { getHistory } from "../configureStore";
 import Message from "../shared/message";
+import Errors from "../shared/error/errors";
 
 import services from "./service";
 
@@ -29,7 +30,7 @@ const messageDeleteSuccess = "Xóa chi nhánh thành công.";
 
 const actions = {
     doClearErrorMessage: () => {
-        return { type: ERROR_MESSAGE_CLEAR };
+        return { type: BRANCH_ERROR_MESSAGE_CLEAR };
     },
 
     list: (filter = {}) => async dispatch => {
@@ -40,20 +41,23 @@ const actions = {
 
             dispatch({ type: BRANCH_GET_SUCCESS, payload: response.data });
         } catch (error) {
-            console.log(error);
+            Errors.handle(error);
+            dispatch({
+                type: BRANCH_GET_ERROR
+            });
         }
     },
 
     doTableRowSelection: (selectedRowKeys, selectedRows) => dispatch => {
         dispatch({
-            type: TABLE_ROW_SELECTION,
+            type: BRANCH_TABLE_ROW_SELECTION,
             payload: { selectedRowKeys, selectedRows }
         });
     },
 
     doTableRowClick: (selectedRowKey, selectedRow) => dispatch => {
         dispatch({
-            type: TABLE_ROW_CLICK,
+            type: BRANCH_TABLE_ROW_CLICK,
             payload: {
                 selectedRowKey,
                 selectedRow
@@ -73,7 +77,7 @@ const actions = {
                 payload: response.data
             });
         } catch (error) {
-            console.log(error);
+            Errors.handle(error);
             dispatch({
                 type: BRANCH_FIND_ERROR
             });
@@ -94,7 +98,8 @@ const actions = {
 
             Message.success(messageCreateSuccess);
         } catch (error) {
-            console.log(error);
+            Errors.handle(error);
+
             dispatch({
                 type: BRANCH_CREATE_ERROR
             });
@@ -117,6 +122,8 @@ const actions = {
 
             getHistory().push("/branch");
         } catch (error) {
+            Errors.handle(error);
+
             dispatch({
                 type: BRANCH_UPDATE_ERROR
             });
@@ -124,13 +131,9 @@ const actions = {
     },
 
     doDestroyAll: ids => async dispatch => {
-        try {
-            await ids.forEach(async branchId => {
-                dispatch(actions.doDestroy(branchId));
-            });
-        } catch (error) {
-            console.log(error);
-        }
+        await ids.forEach(async branchId => {
+            dispatch(actions.doDestroy(branchId));
+        });
     },
 
     doDestroy: id => async dispatch => {
@@ -147,7 +150,10 @@ const actions = {
             });
             Message.success(messageDeleteSuccess);
         } catch (error) {
-            console.log(error);
+            Errors.handle(error);
+            dispatch({
+                type: BRANCH_DESTROY_ERROR
+            });
         }
     }
 };
