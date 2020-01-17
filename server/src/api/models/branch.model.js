@@ -1,12 +1,7 @@
 const mongoose = require("mongoose");
 const httpStatus = require("http-status");
 const { omitBy, isNil } = require("lodash");
-const bcrypt = require("bcryptjs");
-const moment = require("moment-timezone");
-const jwt = require("jwt-simple");
-const uuidv4 = require("uuid/v4");
 const APIError = require("../utils/APIError");
-const { env, jwtSecret, jwtExpirationInterval } = require("../../config/vars");
 
 /**
  * Branch Schema
@@ -16,7 +11,7 @@ const branchSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      minlength: 2,
+      minlength: 3,
       maxlength: 128,
       uppercase: true,
       trim: true,
@@ -86,6 +81,7 @@ branchSchema.statics = {
    * @returns {Promise<Branch[]>}
    */
   list({ page = 1, perPage = 30, name }) {
+    name = name ? new RegExp(name, 'i') : null;
     const options = omitBy({ name }, isNil);
     options.isActive = true;
     return (
