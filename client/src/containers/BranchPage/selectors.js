@@ -27,6 +27,11 @@ const selectFindLoading = createSelector(
     branch => branch.findLoading
 );
 
+const selectExportLoading = createSelector(
+    [selectRaw],
+    branch => branch.exportLoading
+);
+
 const selectErrorMessage = createSelector([selectRaw], branch => branch.error);
 
 const selectBranchs = createSelector([selectRaw], branch => branch.branchs);
@@ -55,7 +60,8 @@ const selectors = {
     selectSelectedRowKeys,
     selectDestroyLoading,
     selectRecord,
-    selectFindLoading
+    selectFindLoading,
+    selectExportLoading
 };
 
 export default selectors;

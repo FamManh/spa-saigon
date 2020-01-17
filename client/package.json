@@ -9,6 +9,7 @@
     "antd": "^3.26.7",
     "axios": "^0.19.1",
     "connected-react-router": "^6.6.1",
+    "file-saver": "^2.0.2",
     "history": "^4.10.1",
     "immer": "^5.2.1",
     "less": "^3.10.3",
@@ -25,7 +26,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "styled-components": "^5.0.0"
+    "styled-components": "^5.0.0",
+    "xlsx": "^0.15.4"
   },
   "scripts": {
     "start": "react-scripts start",
