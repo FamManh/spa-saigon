@@ -8,7 +8,6 @@ const APIError = require("../utils/APIError");
  */
 const careers = ["masseur", "sauna"];
 
-
 /**
  * Staff Schema
  * @private
@@ -53,15 +52,14 @@ const staffSchema = new mongoose.Schema(
  */
 staffSchema.method({
   transform() {
-    const transformed = {};
-    const fields = ["id", "name", "runame", "branch", "career"];
+                const transformed = {};
+                const fields = ["id", "name", "runame", "branch", "career"];
+                fields.forEach(field => {
+                  transformed[field] = this[field];
+                });
 
-    fields.forEach(field => {
-      transformed[field] = this[field];
-    });
-
-    return transformed;
-  }
+                return transformed;
+              }
 });
 
 /**
@@ -80,7 +78,10 @@ staffSchema.statics = {
       let staff;
 
       if (mongoose.Types.ObjectId.isValid(id)) {
-        staff = await this.findById(id).exec();
+        staff = await this.findById(id)
+          .populate("branch", "name")
+          .select("id name runame branch career")
+          .exec();
       }
       if (staff) {
         return staff;
@@ -102,14 +103,15 @@ staffSchema.statics = {
    * @param {number} limit - Limit number of staffs to be returned.
    * @returns {Promise<Staff[]>}
    */
-  list({ page = 1, perPage = 30, name, runame, branch, career  }) {
-    name = name ? new RegExp(name, 'i') : null;
+  list({ page = 1, perPage = 30, name, runame, branch, career }) {
+    name = name ? new RegExp(name, "i") : null;
     runame = runame ? new RegExp(runame, "i") : null;
     const options = omitBy({ name, runame, branch, career }, isNil);
     options.isActive = true;
     return (
       this.find(options)
         .sort({ createdAt: -1 })
+        .populate("branch", "name")
         //   .skip(perPage * (page - 1))
         //   .limit(perPage)
         .exec()

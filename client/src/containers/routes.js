@@ -41,6 +41,40 @@ const privateRoutes = [
         label: "Thông tin chi nhánh",
         permissionRequired: null,
         exact: true
+    },
+    {
+        path: "/staff",
+        exact: true,
+        loader: () => import("./StaffPage/list/ListPage"),
+        menu: true,
+        label: "Nhân viên",
+        permissionRequired: null,
+        icon: "team"
+    },
+    {
+        path: "/staff/new",
+        exact: true,
+        loader: () => import("./StaffPage/form/FormPage"),
+        menu: false,
+        label: "Tạo mới nhân viên",
+        permissionRequired: null,
+        icon: "home"
+    },
+    {
+        path: "/staff/:id/edit",
+        loader: () => import("./StaffPage/form/FormPage"),
+        menu: false,
+        label: "Tạo mới nhân viên",
+        permissionRequired: null,
+        exact: true
+    },
+    {
+        path: "/staff/:id/view",
+        loader: () => import("./StaffPage/view/ViewPage"),
+        menu: false,
+        label: "Thông tin nhân viên",
+        permissionRequired: null,
+        exact: true
     }
 ];
 
