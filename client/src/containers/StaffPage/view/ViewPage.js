@@ -19,13 +19,13 @@ const ViewPage = ({ match }) => {
             <Breadcrumb
                 items={[
                     ["Trang chủ", "/"],
-                    ["Chi nhánh", "/branch"],
+                    ["Chi nhánh", "/staff"],
                     ["Thông tin"]
                 ]}
             />
 
             <ContentWrapper>
-                <PageTitle>Thông tin chi nhánh</PageTitle>
+                <PageTitle>Thông tin nhân viên</PageTitle>
 
                 <ViewToolbar match={match} />
 
