@@ -75,15 +75,13 @@ noteSchema.statics = {
    * @param {number} limit - Limit number of notes to be returned.
    * @returns {Promise<Note[]>}
    */
-  list({ page = 1, perPage = 30 }) {
-    return (
-      this.find({})
-        .sort({ isRead: 1 })
-        .sort({ createAt: -1 })
-          .skip(perPage * (page - 1))
-          .limit(perPage)
-        .exec()
-    );
+  list({ limit = 30, skip = 0 }) {
+    return this.find({})
+      .sort({ isRead: 1 })
+      .sort({ createAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .exec();
   },
 };
 

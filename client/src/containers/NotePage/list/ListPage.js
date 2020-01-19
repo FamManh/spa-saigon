@@ -7,6 +7,7 @@ import Breadcrumb from "../../shared/Breadcrumb";
 import { useDispatch } from "react-redux";
 import actions from '../actions';
 import ListTable from "./ListTable";
+import {Drawer, Button } from 'antd';
 
 const ListPage = () => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const ListPage = () => {
                 <PageTitle>Chi nhánh</PageTitle>
 
                 <ListToolbar />
-                <ListTable />
+                <ListTable/>
             </ContentWrapper>
         </React.Fragment>
     );
