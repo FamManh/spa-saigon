@@ -1,12 +1,12 @@
 import React from "react";
 import Toolbar from "../../shared/styles/Toolbar";
 import { Button, Tooltip, Popconfirm } from "antd";
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import selectors from "../selectors";
 import actions from "../actions";
 import { Link } from "react-router-dom";
 
-const  ListToolbar = () => {
+const ListToolbar = () => {
     const destroyLoading = useSelector(selectors.selectDestroyLoading);
     const dataLoading = useSelector(selectors.selectDataLoading);
     const exportLoading = useSelector(selectors.selectExportLoading);
@@ -23,7 +23,6 @@ const  ListToolbar = () => {
     };
 
     let renderExportButton = () => {
-
         const disabled = !branchs || dataLoading;
 
         const button = (
@@ -38,18 +37,15 @@ const  ListToolbar = () => {
         );
 
         if (disabled) {
-            return (
-                <Tooltip title="Không có dữ liệu">
-                    {button}
-                </Tooltip>
-            );
+            return <Tooltip title="Không có dữ liệu">{button}</Tooltip>;
         }
 
         return button;
-    }
+    };
 
     let renderDestroyButton = () => {
-        const disabled = selectedRowKeys && !selectedRowKeys.length || dataLoading;
+        const disabled =
+            (selectedRowKeys && !selectedRowKeys.length) || dataLoading;
 
         const button = (
             <Button
@@ -64,10 +60,10 @@ const  ListToolbar = () => {
 
         const buttonWithConfirm = (
             <Popconfirm
-                title='Bạn có chắc chắn muốn xóa?'
+                title="Bạn có chắc chắn muốn xóa?"
                 onConfirm={() => doDestroyAllSelected()}
-                okText='Chắc chắn'
-                cancelText='Hủy'
+                okText="Chắc chắn"
+                cancelText="Hủy"
             >
                 {button}
             </Popconfirm>
@@ -75,18 +71,18 @@ const  ListToolbar = () => {
 
         if (disabled) {
             return (
-                <Tooltip title='Vui lòng chọn những trường muốn xóa'>
+                <Tooltip title="Vui lòng chọn những trường muốn xóa">
                     {button}
                 </Tooltip>
             );
         }
 
         return buttonWithConfirm;
-    }
+    };
 
     const onReload = () => {
         dispatch(actions.list());
-    }
+    };
 
     return (
         <Toolbar>
@@ -110,6 +106,6 @@ const  ListToolbar = () => {
             {renderExportButton()}
         </Toolbar>
     );
-}
+};
 
 export default ListToolbar;

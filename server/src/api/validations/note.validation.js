@@ -4,10 +4,8 @@ module.exports = {
   // GET /v1/notes
   listNotes: {
     query: {
-      page: Joi.number().min(1),
-      perPage: Joi.number()
-        .min(1)
-        .max(100)
+      limit: Joi.number().min(1),
+      skip: Joi.number()
     }
   },
 

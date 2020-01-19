@@ -1,14 +1,17 @@
-import { Icon, Layout, Menu, Dropdown, Avatar } from 'antd';
+import { Icon, Layout, Menu, Dropdown, Avatar, Button, Badge } from 'antd';
 import React from 'react';
 import HeaderWrapper from './styles/HeaderWrapper';
 import selectors from './selectors';
+import noteSelectors from "../NotePage/selectors";
 import actions from './actions';
+import noteActions from "../NotePage/actions";
 import {useDispatch, useSelector} from 'react-redux';
 const { Header: AntHeader } = Layout;
 
 
 const Header = () => {
   const dispatch = useDispatch();
+  const noteUnReadCount = useSelector(noteSelectors.selectUnReadCount);
   let doSignout = () => {
     actions.doSignout();
   };
@@ -52,6 +55,13 @@ const Header = () => {
                     onClick={doToggleMenu}
                 />
                 <div>
+                    <Badge count={noteUnReadCount}>
+                        <Button
+                            icon="edit"
+                            style={{ border: "0px" }}
+                            onClick={() => dispatch(noteActions.doToggle())}
+                        />
+                    </Badge>
                     <Dropdown
                         className="user-dropdown"
                         overlay={userMenu}
@@ -64,9 +74,7 @@ const Header = () => {
                                 src={undefined}
                                 alt="avatar"
                             />
-                            <span className="user-dropdown-text">
-                                 Manh
-                            </span>
+                            <span className="user-dropdown-text">Manh</span>
                         </span>
                     </Dropdown>
                 </div>
