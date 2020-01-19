@@ -12,8 +12,7 @@ module.exports = {
       code: Joi.string(),
       name: Joi.string(),
       branch: Joi.string()
-        .regex(/^[a-fA-F0-9]{24}$/)
-        .required(),
+        .regex(/^[a-fA-F0-9]{24}$/),
       favorite: Joi.bool()
     }
   },
