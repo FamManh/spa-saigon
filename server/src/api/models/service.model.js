@@ -110,7 +110,9 @@ serviceSchema.statics = {
     options.isActive = true;
     return (
       this.find(options)
+        .populate("branch", "name")
         .sort({ createdAt: -1 })
+        .select("id code name items branch favorite")
         //   .skip(perPage * (page - 1))
         //   .limit(perPage)
         .exec()

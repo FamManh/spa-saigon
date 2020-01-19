@@ -4,6 +4,7 @@ import signin from "./SigninPage/reducer";
 import layout from "./Layout/reducer";
 import branch from "./BranchPage/reducer";
 import staff from "./StaffPage/reducer";
+import service from "./ServicePage/reducer";
 
 export default history =>
     combineReducers({
@@ -11,5 +12,6 @@ export default history =>
         signin,
         layout,
         branch,
-        staff
+        staff,
+        service
     });

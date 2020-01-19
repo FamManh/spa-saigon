@@ -75,6 +75,40 @@ const privateRoutes = [
         label: "Thông tin nhân viên",
         permissionRequired: null,
         exact: true
+    },
+    {
+        path: "/service",
+        exact: true,
+        loader: () => import("./ServicePage/list/ListPage"),
+        menu: true,
+        label: "Dịch vụ",
+        permissionRequired: null,
+        icon: "appstore"
+    },
+    {
+        path: "/service/new",
+        exact: true,
+        loader: () => import("./ServicePage/form/FormPage"),
+        menu: false,
+        label: "Tạo mới dịch vụ",
+        permissionRequired: null,
+        icon: "home"
+    },
+    {
+        path: "/service/:id/edit",
+        loader: () => import("./ServicePage/form/FormPage"),
+        menu: false,
+        label: "Tạo mới dịch vụ",
+        permissionRequired: null,
+        exact: true
+    },
+    {
+        path: "/service/:id/view",
+        loader: () => import("./ServicePage/view/ViewPage"),
+        menu: false,
+        label: "Thông tin dịch vụ",
+        permissionRequired: null,
+        exact: true
     }
 ];
 

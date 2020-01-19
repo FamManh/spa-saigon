@@ -63,7 +63,7 @@ exports.create = async (req, res, next) => {
  */
 exports.update = (req, res, next) => {
   const service = Object.assign(req.locals.service, req.body);
-
+  console.log(service);
   service
     .save()
     .then(savedService => res.json(savedService.transform()))
