@@ -6,6 +6,7 @@ import branch from "./BranchPage/reducer";
 import staff from "./StaffPage/reducer";
 import service from "./ServicePage/reducer";
 import note from "./NotePage/reducer";
+import shift from "./ShiftPage/reducer";
 
 export default history =>
     combineReducers({
@@ -15,5 +16,6 @@ export default history =>
         branch,
         staff,
         service,
-        note
+        note,
+        shift
     });

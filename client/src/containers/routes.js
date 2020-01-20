@@ -9,36 +9,36 @@ const privateRoutes = [
         icon: "home"
     },
     {
-        path: "/branch",
+        path: "/shift",
         exact: true,
-        loader: () => import("./BranchPage/list/ListPage"),
+        loader: () => import("./ShiftPage/list/ListPage"),
         menu: true,
-        label: "Chi nhánh",
+        label: "Ca",
         permissionRequired: null,
-        icon: "branches"
+        icon: "deployment-unit"
     },
     {
-        path: "/branch/new",
+        path: "/shift/new",
         exact: true,
-        loader: () => import("./BranchPage/form/FormPage"),
+        loader: () => import("./ShiftPage/form/FormPage"),
         menu: false,
-        label: "Tạo mới chi nhánh",
+        label: "Tạo mới Ca",
         permissionRequired: null,
         icon: "home"
     },
     {
-        path: "/branch/:id/edit",
-        loader: () => import("./BranchPage/form/FormPage"),
+        path: "/shift/:id/edit",
+        loader: () => import("./ShiftPage/form/FormPage"),
         menu: false,
-        label: "Tạo mới chi nhánh",
+        label: "Tạo mới Ca",
         permissionRequired: null,
         exact: true
     },
     {
-        path: "/branch/:id/view",
-        loader: () => import("./BranchPage/view/ViewPage"),
+        path: "/shift/:id/view",
+        loader: () => import("./ShiftPage/view/ViewPage"),
         menu: false,
-        label: "Thông tin chi nhánh",
+        label: "Thông tin Ca",
         permissionRequired: null,
         exact: true
     },
@@ -107,6 +107,40 @@ const privateRoutes = [
         loader: () => import("./ServicePage/view/ViewPage"),
         menu: false,
         label: "Thông tin dịch vụ",
+        permissionRequired: null,
+        exact: true
+    },
+    {
+        path: "/branch",
+        exact: true,
+        loader: () => import("./BranchPage/list/ListPage"),
+        menu: true,
+        label: "Chi nhánh",
+        permissionRequired: null,
+        icon: "branches"
+    },
+    {
+        path: "/branch/new",
+        exact: true,
+        loader: () => import("./BranchPage/form/FormPage"),
+        menu: false,
+        label: "Tạo mới chi nhánh",
+        permissionRequired: null,
+        icon: "home"
+    },
+    {
+        path: "/branch/:id/edit",
+        loader: () => import("./BranchPage/form/FormPage"),
+        menu: false,
+        label: "Tạo mới chi nhánh",
+        permissionRequired: null,
+        exact: true
+    },
+    {
+        path: "/branch/:id/view",
+        loader: () => import("./BranchPage/view/ViewPage"),
+        menu: false,
+        label: "Thông tin chi nhánh",
         permissionRequired: null,
         exact: true
     }
