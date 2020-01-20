@@ -6,6 +6,7 @@ const staffRoutes = require("./staff.route");
 const serviceRoutes = require("./service.route");
 const noteRoutes = require("./note.route");
 const shiftRoutes = require("./shift.route");
+const ledgerRoutes = require("./ledger.route");
 
 const router = express.Router();
 
@@ -26,5 +27,6 @@ router.use("/staff", staffRoutes);
 router.use("/service", serviceRoutes);
 router.use("/note", noteRoutes);
 router.use("/shift", shiftRoutes);
+router.use("/ledger", ledgerRoutes);
 
 module.exports = router;
