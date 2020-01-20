@@ -101,20 +101,36 @@ shiftSchema.statics = {
    * @param {number} limit - Limit number of shifts to be returned.
    * @returns {Promise<Shift[]>}
    */
-  list({ page = 1, perPage = 30, branch }) {
-    console.log(branch);
-    const options = omitBy({ branch }, isNil);
+  list({branch, date }) {
+    console.log(
+      moment(date)
+        .seconds(0)
+        .milliseconds(0)
+        .toISOString()
+    );
+
     return (
-      this.find(options)
+      this.find({
+        $and: [
+        {
+          date: {
+            $gte: moment(date)
+              .startOf("month")
+              .toDate(),
+            $lte: moment(date)
+              .endOf("month")
+              .toDate()
+          }
+        },
+        { branch: branch }]
+      })
         .sort({ createdAt: -1 })
         .populate("branch", "name")
-        //   .skip(perPage * (page - 1))
-        //   .limit(perPage)
         .exec()
     );
   },
   checkDuplicate(date, branchId) {
-    return this.countDocuments({
+    return this.find({
       $and: [
         {
           date: {

@@ -2,6 +2,7 @@ const httpStatus = require("http-status");
 const { omit } = require("lodash");
 const Shift = require("../models/shift.model");
 const APIError = require('../utils/APIError');
+const moment = require('moment');
 /**
  * Load shift and append to req.
  * @public
@@ -28,15 +29,17 @@ exports.get = (req, res) => res.json(req.locals.shift.transform());
  */
 exports.create = async (req, res, next) => {
   try {
-    
-    const shift = new Shift(req.body);
+    let date = moment(req.body.date).format('x');
+    const shift = new Shift({...req.body, date});
     const isExists = await Shift.checkDuplicate(req.body.date, req.body.branch);
     if (isExists){
-        throw new APIError({
-          status: httpStatus.CONFLICT,
-          message: "Ca hiện tại đã tồn tại"
-        });
-    } const savedShift = await shift.save();
+      return res.status(409).json({
+        id: isExists[0]._id,
+        status: httpStatus.CONFLICT,
+        message: "Ca hiện tại đã tồn tại123",
+      });
+    } 
+    const savedShift = await shift.save();
     res.status(httpStatus.CREATED);
     res.json(savedShift.transform());
   } catch (error) {
