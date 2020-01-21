@@ -43,6 +43,31 @@ const privateRoutes = [
         exact: true
     },
     {
+        path: "/ledger/:id",
+        exact: true,
+        loader: () => import("./LedgerPage/list/ListPage"),
+        menu: false,
+        label: "Tính tua",
+        permissionRequired: null,
+        icon: "home"
+    },
+    {
+        path: "/ledger/:id/edit",
+        loader: () => import("./LedgerPage/form/FormPage"),
+        menu: false,
+        label: "Chỉnh sửa tua",
+        permissionRequired: null,
+        exact: true
+    },
+    // {
+    //     path: "/ledger/:id/view",
+    //     loader: () => import("./LedgerPage/view/ViewPage"),
+    //     menu: false,
+    //     label: "Thông tin tua",
+    //     permissionRequired: null,
+    //     exact: true
+    // },
+    {
         path: "/staff",
         exact: true,
         loader: () => import("./StaffPage/list/ListPage"),

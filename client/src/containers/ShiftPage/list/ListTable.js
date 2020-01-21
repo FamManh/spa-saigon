@@ -23,9 +23,8 @@ const ListTable = () => {
             dataIndex: "date",
             sorter: (a, b) => a.date.length - b.date.length,
             render: (text, row, index)=>{
-                console.log(row);
             return (
-                <Link to={`/shift/${row.id}`}>
+                <Link to={`/ledger/${row.id}`}>
                     {moment(text).format("YYYY-MM-DD") + '   '} 
                     {row.lock ? <Icon type="lock"/> : null}
                 </Link>

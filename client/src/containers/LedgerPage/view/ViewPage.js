@@ -17,11 +17,11 @@ const ViewPage = ({ match }) => {
     return (
         <React.Fragment>
             <Breadcrumb
-                items={[["Trang chủ", "/"], ["Ca", "/shift"], ["Thông tin"]]}
+                items={[["Trang chủ", "/"], ["Tua", "/ledger"], ["Thông tin"]]}
             />
 
             <ContentWrapper>
-                <PageTitle>Thông tin chi nhánh</PageTitle>
+                <PageTitle>Thông tin tua</PageTitle>
 
                 <ViewToolbar match={match} />
 

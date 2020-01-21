@@ -76,8 +76,6 @@ const DynamicFormItem = ({ match, onChange, initialValue }) => {
     }, [serviceItems]);
 
     const renderFormItem = () => {
-        console.log('ngu lo');
-        console.log(serviceItems);
         return serviceItems
             ? serviceItems.map((service, key) => {
                   return (
