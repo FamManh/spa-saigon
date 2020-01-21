@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const httpStatus = require("http-status");
 const { omitBy, isNil } = require("lodash");
 const APIError = require("../utils/APIError");
-const moment = require('moment');
-const {ObjectId} = mongoose.Schema;
+const moment = require("moment");
+const { ObjectId } = mongoose.Schema;
 
 /**
  * Shift Schema
@@ -52,7 +52,16 @@ const shiftSchema = new mongoose.Schema(
 shiftSchema.method({
   transform() {
     const transformed = {};
-    const fields = ["id", "date", "branch", "lock", "cash", "certificate", "adminCash","adminCertificate"];
+    const fields = [
+      "id",
+      "date",
+      "branch",
+      "lock",
+      "cash",
+      "certificate",
+      "adminCash",
+      "adminCertificate"
+    ];
 
     fields.forEach(field => {
       transformed[field] = this[field];
@@ -101,17 +110,11 @@ shiftSchema.statics = {
    * @param {number} limit - Limit number of shifts to be returned.
    * @returns {Promise<Shift[]>}
    */
-  list({branch, date }) {
-    console.log(
-      moment(date)
-        .seconds(0)
-        .milliseconds(0)
-        .toISOString()
-    );
+  list({ branch, date }) {
+    const options = omitBy({ branch }, isNil);
 
-    return (
-      this.find({
-        $and: [
+    return this.find({
+      $and: [
         {
           date: {
             $gte: moment(date)
@@ -122,12 +125,12 @@ shiftSchema.statics = {
               .toDate()
           }
         },
-        { branch: branch }]
-      })
-        .sort({ createdAt: -1 })
-        .populate("branch", "name")
-        .exec()
-    );
+        options
+      ]
+    })
+      .sort({ createdAt: -1 })
+      .populate("branch", "name")
+      .exec();
   },
   checkDuplicate(date, branchId) {
     return this.find({

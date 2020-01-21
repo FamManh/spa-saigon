@@ -8,18 +8,19 @@ module.exports = {
       perPage: Joi.number()
         .min(1)
         .max(100),
-      date: Joi.date().timestamp(),
+      date: Joi.date()
+        .timestamp()
+        .required(),
       branch: Joi.string()
         .regex(/^[a-fA-F0-9]{24}$/)
-        .required()
+        // .required()
     }
   },
 
   // POST /v1/shifts
   createShift: {
     body: {
-      date: Joi.date()
-        .required(),
+      date: Joi.date().required(),
       branch: Joi.string()
         .regex(/^[a-fA-F0-9]{24}$/)
         .required(),
