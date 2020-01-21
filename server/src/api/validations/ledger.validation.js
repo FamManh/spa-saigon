@@ -8,7 +8,7 @@ module.exports = {
       perPage: Joi.number()
         .min(1)
         .max(100),
-      shiftId: Joi.string()
+      shift: Joi.string()
         .regex(/^[a-fA-F0-9]{24}$/)
         .required()
     }

@@ -96,14 +96,12 @@ ledgerSchema.statics = {
    * @param {number} limit - Limit number of ledgers to be returned.
    * @returns {Promise<Ledger[]>}
    */
-  list({ page = 1, perPage = 30, name }) {
-    name = name ? new RegExp(name, 'i') : null;
-    const options = omitBy({ name }, isNil);
-    options.isActive = true;
+  list({ shift }) {
+    const options = omitBy({ shift }, isNil);
     return (
       this.find(options)
         .populate("staff", "name")
-        .populate("createdBy", "name")
+        .populate("createdBy", "username")
         .populate(
           "shift",
           "date branch lock cash certificate adminCash adminCertificate"

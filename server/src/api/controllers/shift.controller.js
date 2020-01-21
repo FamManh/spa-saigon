@@ -1,6 +1,7 @@
 const httpStatus = require("http-status");
 const { omit } = require("lodash");
 const Shift = require("../models/shift.model");
+const Ledger = require("../models/ledger.model");
 const APIError = require('../utils/APIError');
 const moment = require('moment');
 /**
@@ -78,11 +79,11 @@ exports.list = async (req, res, next) => {
  * Delete shift
  * @public
  */
-exports.remove = (req, res, next) => {
+exports.remove = async (req, res, next) => {
   const shift = req.locals.shift;
-  
+  await Ledger.deleteMany({ shift: shift._id });
   shift
-    .save()
+    .remove()
     .then(savedShift => res.json(savedShift.transform()))
     .catch(e => next(e));
 };

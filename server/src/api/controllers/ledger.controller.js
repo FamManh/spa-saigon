@@ -28,7 +28,8 @@ exports.get = (req, res) => res.json(req.locals.ledger.transform());
 exports.create = async (req, res, next) => {
   try {
     const ledger = new Ledger({ ...req.body, createdBy: req.user.id});
-    const savedLedger = await ledger.save();
+    let savedLedger = await ledger.save();
+    savedLedger = await savedLedger.populate('staff', 'name').populate('createdBy', 'username').execPopulate();
     res.status(httpStatus.CREATED);
     res.json(savedLedger.transform());
   } catch (error) {
@@ -42,9 +43,9 @@ exports.create = async (req, res, next) => {
  */
 exports.update = (req, res, next) => {
   const ledger = Object.assign(req.locals.ledger, req.body);
-
   ledger
     .save()
+    .then(savedLedger => savedLedger.populate('staff', 'name').populate('createdBy', 'username').execPopulate())
     .then(savedLedger => res.json(savedLedger.transform()))
     .catch(e => next(Ledger.checkDuplicateLedgername(e)));
 };

@@ -60,7 +60,6 @@ const actions = {
             Excel.exportAsExcelFile(data, excelHeaderSchema, "demo");
             dispatch({ type: SHIFT_EXPORT_SUCCESS });
         } catch (error) {
-            console.log(error);
             dispatch({ type: SHIFT_EXPORT_ERROR });
         }
     },
@@ -126,32 +125,30 @@ const actions = {
                         ? error.response.data.id
                         : null;
                 if (shiftId){
-                    getHistory().push(`/shift/${shiftId}`);
+                    getHistory().push(`/ledger/${shiftId}`);
                     return;
                 } 
                 
             } 
             Errors.handle(error);
-
-            
         }
     },
 
-    doUpdate: (id, values) => async dispatch => {
+    doUpdate: (id, values, redirect = true) => async dispatch => {
         try {
             dispatch({
                 type: SHIFT_UPDATE_START
             });
 
-            await services.updateFn(id, values);
-
+            let response = await services.updateFn(id, values);
             dispatch({
-                type: SHIFT_UPDATE_SUCCESS
+                type: SHIFT_UPDATE_SUCCESS,
+                payload: response.data
             });
 
             Message.success(messageUpdateSuccess);
 
-            getHistory().push("/shift");
+            if (redirect) getHistory().push("/shift");
         } catch (error) {
             Errors.handle(error);
 

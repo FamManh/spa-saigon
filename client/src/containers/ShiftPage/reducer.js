@@ -80,6 +80,7 @@ const shiftReducer = (state = initialState, { type, payload }) =>
             case SHIFT_UPDATE_SUCCESS:
                 draft.saveLoading = false;
                 draft.error = null;
+                draft.record = payload;
                 break;
             case SHIFT_UPDATE_ERROR:
                 draft.saveLoading = false;
