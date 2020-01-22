@@ -128,7 +128,7 @@ shiftSchema.statics = {
         options
       ]
     })
-      .sort({ createdAt: -1 })
+      .sort({ date: 1 })
       .populate("branch", "name")
       .exec();
   },

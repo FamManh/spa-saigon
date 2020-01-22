@@ -21,7 +21,7 @@ const FormPage = ({match}) => {
             <Breadcrumb
                 items={[
                     ["Trang chủ", "/"],
-                    ["Chi nhánh", "/staff"],
+                    ["Nhân viên", "/staff"],
                     [title()]
                 ]}
             />

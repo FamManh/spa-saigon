@@ -13,7 +13,6 @@ import {
     NOTE_READMORE_SUCCESS,
     NOTE_READMORE_ERROR
 } from "./constants";
-import Message from "../shared/message";
 import Errors from "../shared/error/errors";
 
 import services from "./service";

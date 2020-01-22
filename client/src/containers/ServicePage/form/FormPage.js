@@ -4,9 +4,7 @@ import ContentWrapper from "../../Layout/styles/ContentWrapper";
 import PageTitle from "../../shared/styles/PageTitle";
 import Breadcrumb from "../../shared/Breadcrumb";
 import FormComp from "./FormComp";
-import { useSelector, useDispatch } from "react-redux";
-import selectors from "../selectors";
-import { Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import branchActions from "../../BranchPage/actions";
 import actions from "../actions";
 const FormPage = ({ match }) => {

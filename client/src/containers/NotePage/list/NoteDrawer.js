@@ -1,40 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Drawer, Button, Divider, Row, Col, Checkbox, Input } from "antd";
+import { Drawer, Button, Divider, Checkbox, Input } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import selectors from "../selectors";
 import actions from "../actions";
 import ListToolbar from "./ListToolbar";
 import Text from "antd/lib/typography/Text";
-const InputGroup = Input.Group;
-const pStyle = {
-    fontSize: 16,
-    color: "rgba(0,0,0,0.85)",
-    lineHeight: "24px",
-    display: "block",
-    marginBottom: 16
-};
-
-const DescriptionItem = ({ title, content }) => (
-    <div
-        style={{
-            fontSize: 14,
-            lineHeight: "22px",
-            marginBottom: 7,
-            color: "rgba(0,0,0,0.65)"
-        }}
-    >
-        <p
-            style={{
-                marginRight: 8,
-                display: "inline-block",
-                color: "rgba(0,0,0,0.85)"
-            }}
-        >
-            {title}:
-        </p>
-        {content}
-    </div>
-);
 
 const NoteDrawer = () => {
     const dispatch = useDispatch();

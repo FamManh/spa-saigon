@@ -4,15 +4,12 @@ import {
     Input,
     Row,
     Col,
-    Checkbox,
     InputNumber,
     Icon,
     Button,
     Tooltip
 } from "antd";
-import selectors from "../selectors";
 import { tailFormItemLayout } from "../../shared/styles/FormWrapper";
-import { useSelector } from "react-redux";
 
 const dynamicFormItemLayout = {
     wrapperCol: {
@@ -28,9 +25,7 @@ const dynamicFormItemLayout = {
 };
 
 const DynamicFormItem = ({ match, onChange, initialValue }) => {
-    let isEditing = () => {
-        return !!match.params.id;
-    };
+
     let serviceSchema = {
         vnname: "",
         runame: "",

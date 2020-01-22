@@ -63,7 +63,6 @@ const shiftReducer = (state = initialState, { type, payload }) =>
                 break;
             case SHIFT_GET_SUCCESS:
                 draft.dataLoading = false;
-                console.log(payload);
                 draft.shifts = payload;
                 draft.error = null;
                 break;

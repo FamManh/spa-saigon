@@ -2,9 +2,8 @@ import sgapi from "../../api/sgapi";
 
 const services = {
     listFn: async ({date, branch}) => {
-        const response = await sgapi.get(
-            `/shift?branch=${branch}&date=${date}`
-        );
+        let urlBranch = branch ? `&branch=${branch}` : "";
+        const response = await sgapi.get(`/shift?date=${date}` + urlBranch);
         return response;
     },
 
