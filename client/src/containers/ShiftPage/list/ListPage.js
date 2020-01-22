@@ -8,9 +8,17 @@ import { useDispatch } from "react-redux";
 import actions from '../actions';
 import ListTable from "./ListTable";
 import ListFilter from "./ListFilter";
+import moment from 'moment';
 
 const ListPage = () => {
     const dispatch = useDispatch();
+    useEffect(() => {
+                        dispatch(
+                            actions.list({
+                                date: moment(new Date()).format("x")
+                            })
+                        );
+                    }, []);
     return (
         <React.Fragment>
             <Breadcrumb items={[["Trang chủ", "/"], ["Ca"]]} />

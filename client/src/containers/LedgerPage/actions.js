@@ -29,21 +29,20 @@ import {
     LEDGER_DISCOUNT_CHANGE,
     LEDGER_PAYMENT_METHOD_CHANGE,
     LEDGER_SERVICE_ITEM_ADD_CLICK,
-    LEDGER_SERVICE_ITEM_REMOVE_CLICK
 } from "./constants";
-import { getHistory } from "../configureStore";
 import Message from "../shared/message";
 import Errors from "../shared/error/errors";
-
-import selectors from "./selectors";
 import services from "./service";
 import { Excel } from "../shared/excel/excel";
+import moment from "moment";
+// import dataTemp from "./data.json";
+
 
 const messageUpdateSuccess = "Cập nhật tua thành công.";
 const messageCreateSuccess = "Tạo tua thành công.";
 const messageDeleteSuccess = "Xóa tua thành công.";
 
-const excelHeaderSchema = ["id", "name"];
+const excelHeaderSchema = [];
 
 const actions = {
     doClearErrorMessage: () => {
@@ -68,7 +67,24 @@ const actions = {
     doExport: data => dispatch => {
         try {
             dispatch({ type: LEDGER_EXPORT_START });
-            Excel.exportAsExcelFile(data, excelHeaderSchema, "demo");
+            let tempDate = [];
+            data.forEach(item => {
+                let tempItem = {
+                    ["Tên"]: item.vnname,
+                    ["Tên (tiếng nga)"]: item.runame,
+                    ["Tiền mặt"]: item.cash,
+                    ["Certificate"]: item.certificate,
+                    ["Thời gian"]: item.duration,
+                    // ["Chi nhánh"]: item.shift.branch,
+                    ["Ngày"]: moment(item.shift.date).format("YYYY-MM-DD")
+                };
+                tempDate.push(tempItem);
+            });
+            Excel.exportAsExcelFile(
+                tempDate,
+                excelHeaderSchema,
+                "Tua " + new Date().toISOString()
+            );
             dispatch({ type: LEDGER_EXPORT_SUCCESS });
         } catch (error) {
             console.log(error);
@@ -113,6 +129,20 @@ const actions = {
     },
 
     doCreate: (data, shiftId) => async dispatch => {
+        // console.log(dataTemp);
+        // dataTemp.data.forEach(async item=>{
+        //                            let temp = {
+        //                                vnname: item.vnname,
+        //                                runame: item.runame,
+        //                                duration: item.duration,
+        //                                cash: item.cash,
+        //                                certificate: item.certificate,
+        //                                flag: item.is_special_client,
+        //                                shift: "5e27ffc1f581ef6429fab523",
+        //                                staff: item.staff._id
+        //                            };
+        //                             await services.createFn(temp);
+        //                        })
         let isError = false;
         data.forEach(async item => {
             if (item.staff === "") {

@@ -24,15 +24,15 @@ import {
 import { getHistory } from "../configureStore";
 import Message from "../shared/message";
 import Errors from "../shared/error/errors";
-
+import moment from 'moment';
 import services from "./service";
 import { Excel } from "../shared/excel/excel";
 
-const messageUpdateSuccess = "Cập nhật chi nhánh thành công.";
-const messageCreateSuccess = "Tạo chi nhánh thành công.";
-const messageDeleteSuccess = "Xóa chi nhánh thành công.";
+const messageUpdateSuccess = "Cập nhật ca thành công.";
+const messageCreateSuccess = "Tạo ca thành công.";
+const messageDeleteSuccess = "Xóa ca thành công.";
 
-const excelHeaderSchema = ["id", "name"];
+const excelHeaderSchema = [];
 
 
 const actions = {
@@ -57,7 +57,25 @@ const actions = {
     doExport: data => dispatch => {
         try {
             dispatch({ type: SHIFT_EXPORT_START });
-            Excel.exportAsExcelFile(data, excelHeaderSchema, "demo");
+            let tempDate = [];
+            data.forEach(item => {
+                let tempItem = {
+                    ["Ngày"]: moment(item.date).format("YYYY-MM-DD"),
+                    ["Chi nhánh"]: item.branch.name,
+                    ["Tiền mặt"]: item.cash,
+                    ["Certificate"]: item.certificate,
+                    ["-Tiền mặt-"]: 0,
+                    ["-Certificate-"]: 0,
+                    ["Tiền mặt (admin)"]: 0,
+                    ["Certificate (admin)"]: 0
+                };
+                tempDate.push(tempItem);
+            });
+            Excel.exportAsExcelFile(
+                tempDate,
+                excelHeaderSchema,
+                "Ca " + new Date().toISOString()
+            );
             dispatch({ type: SHIFT_EXPORT_SUCCESS });
         } catch (error) {
             dispatch({ type: SHIFT_EXPORT_ERROR });
@@ -106,13 +124,14 @@ const actions = {
                 type: SHIFT_CREATE_START
             });
 
-            await services.createFn(data);
+            let response = await services.createFn(data);
 
             dispatch({
                 type: SHIFT_CREATE_SUCCESS
             });
 
             Message.success(messageCreateSuccess);
+            getHistory().push(`/ledger/${response.data.id}`);
         } catch (error) {
             dispatch({
                 type: SHIFT_CREATE_ERROR

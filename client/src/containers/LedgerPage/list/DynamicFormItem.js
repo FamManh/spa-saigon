@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
-    Form,
     Input,
     Row,
     Col,
-    Checkbox,
     InputNumber,
-    Icon,
     Button,
     Tooltip,
     Select
 } from "antd";
 import selectors from "../selectors";
 import staffSelectors from "../../StaffPage/selectors";
-import { tailFormItemLayout } from "../../shared/styles/FormWrapper";
 import { useSelector, useDispatch } from "react-redux";
 import actions from "../actions";
 
@@ -23,10 +19,6 @@ const DynamicFormItem = () => {
     const dispatch = useDispatch();
     const staffs = useSelector(staffSelectors.selectStaffs);
 
-    const link = useSelector(selectors.selectLink);
-    const clear = useSelector(selectors.selectClear);
-    const discount = useSelector(selectors.selectDiscount);
-    const paymentMethod = useSelector(selectors.selectPaymentMethod);
     const serviceItems = useSelector(selectors.selectServiceItems);
 
     const handleChange = (name, value, index) => {

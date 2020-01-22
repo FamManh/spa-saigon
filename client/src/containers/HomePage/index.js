@@ -1,6 +1,7 @@
 import React from "react";
 // import styled from "styled-components";
 import Layout from "../Layout";
+import { Redirect } from "react-router-dom";
 
 // const Content = styled.div`
 //     max-width: 400px;
@@ -10,7 +11,7 @@ import Layout from "../Layout";
 
 const HomePage  = () => {
    
-    return <div>Hello viet name</div>;
+    return <Redirect to="/shift"/>;
 };
 
 export default Layout(HomePage);

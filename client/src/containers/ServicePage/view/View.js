@@ -4,7 +4,6 @@ import ViewWrapper from "../../shared/styles/ViewWrapper";
 import TextViewItem from "../../shared/view/TextViewItem";
 import { useSelector } from "react-redux";
 import selectors from "../selectors";
-import { Redirect } from "react-router-dom";
 
 
 const View = () => {

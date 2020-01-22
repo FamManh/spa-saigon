@@ -6,10 +6,9 @@ import shiftActions from '../../ShiftPage/actions';
 import shiftSelectors from "../../ShiftPage/selectors";
 import selectors from "../selectors";
 import actions from "../actions";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const ListToolbar = () => {
-    const location = useLocation();
     const destroyLoading = useSelector(selectors.selectDestroyLoading);
     const dataLoading = useSelector(selectors.selectDataLoading);
     const exportLoading = useSelector(selectors.selectExportLoading);
@@ -119,13 +118,7 @@ const ListToolbar = () => {
                 </Button>
             )}
 
-            {/* <Link to="/pet/importer">
-                <Button type="primary" icon="upload">
-                    {i18n("common.import")}
-                </Button>
-            </Link> */}
-
-            {renderDestroyButton()}
+            {shiftRecord && !shiftRecord.lock && renderDestroyButton()}
 
             <Button type="primary" onClick={() => onReload()} icon="reload">
                 Tải lại

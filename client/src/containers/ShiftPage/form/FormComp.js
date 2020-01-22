@@ -1,4 +1,4 @@
-import { Button, Form, Input, DatePicker, Select } from "antd";
+import { Button, Form, DatePicker, Select, InputNumber } from "antd";
 import actions from "../actions";
 import selectors from "../selectors";
 import branchSelectors from "../../BranchPage/selectors";
@@ -12,8 +12,6 @@ import FormWrapper, {
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 const { Option } = Select;
-const { MonthPicker } = DatePicker;
-const monthFormat = "YYYY/MM";
 
 const FormComp = ({ match, form }) => {
     const dispatch = useDispatch();
@@ -69,8 +67,10 @@ const FormComp = ({ match, form }) => {
                     )}
                     <Form.Item label="Thời gian">
                         {form.getFieldDecorator("date", {
-                            initialValue:isEditing() && record ? moment(record["date"]) :
-                             moment(new Date()),
+                            initialValue:
+                                isEditing() && record
+                                    ? moment(record["date"])
+                                    : moment(new Date()),
                             rules: [
                                 {
                                     required: true,
@@ -78,7 +78,8 @@ const FormComp = ({ match, form }) => {
                                 }
                             ]
                         })(
-                            <DatePicker style={{width: "100%"}}
+                            <DatePicker
+                                style={{ width: "100%" }}
                                 placeholder="Chọn thời gian"
                                 allowClear={false}
                             />
@@ -87,7 +88,9 @@ const FormComp = ({ match, form }) => {
                     <Form.Item label="Chi nhánh">
                         {form.getFieldDecorator("branch", {
                             initialValue:
-                                isEditing() && record ? record["branch"]._id : null,
+                                isEditing() && record
+                                    ? record["branch"]._id
+                                    : null,
                             rules: [
                                 {
                                     required: true,
@@ -104,6 +107,36 @@ const FormComp = ({ match, form }) => {
                             </Select>
                         )}
                     </Form.Item>
+                    {isEditing() && record && (
+                        <>
+                            <Form.Item label="Tiền mặt (admin)">
+                                {form.getFieldDecorator("adminCash", {
+                                    initialValue:
+                                        isEditing() && record
+                                            ? record["adminCash"]
+                                            : null
+                                })(
+                                    <InputNumber
+                                        placeholder="Tiền mặt"
+                                        style={{ width: "100%" }}
+                                    />
+                                )}
+                            </Form.Item>
+                            <Form.Item label="Certificate (admin)">
+                                {form.getFieldDecorator("adminCertificate", {
+                                    initialValue:
+                                        isEditing() && record
+                                            ? record["adminCertificate"]
+                                            : null
+                                })(
+                                    <InputNumber
+                                        placeholder="Certificate"
+                                        style={{ width: "100%" }}
+                                    />
+                                )}
+                            </Form.Item>
+                        </>
+                    )}
                     <Form.Item className="form-buttons" {...tailFormItemLayout}>
                         <Button
                             loading={saveLoading}

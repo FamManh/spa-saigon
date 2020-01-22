@@ -1,9 +1,8 @@
 import { Button, Col, Form, Row, DatePicker, Select } from "antd";
 import actions from "../actions";
-import selectors from "../selectors";
 import branchSelectors from '../../BranchPage/selectors';
 import branchActions from '../../BranchPage/actions';
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import FilterWrapper, {
     formItemLayout
 } from "../../shared/styles/FilterWrapper";
@@ -15,11 +14,6 @@ const monthFormat = "YYYY/MM";
 const ListFilter = ({ form }) => {
     const dispatch = useDispatch();
     const branchs = useSelector(branchSelectors.selectBranchs);
-    // componentDidMount() {
-    //   const { dispatch } = this.props;
-    //   dispatch(actions.doFetch(this.initialFilter()));
-    // }
-
 
     let doSubmit = values => {
         dispatch(actions.list({...values, date: moment(values.date).format('x')}));
@@ -59,15 +53,9 @@ const ListFilter = ({ form }) => {
                     <Col md={24} lg={12}>
                         <Form.Item label="Chi nhánh">
                             {form.getFieldDecorator("branch", {
-                                initialValue: branchs && branchs[0] ? branchs[0].id : null,
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: "Vui lòng chọn chi nhánh"
-                                    }
-                                ]
+                                // initialValue: branchs && branchs[0] ? branchs[0].id : null
                             })(
-                                <Select placeholder="Chọn chi nhánh">
+                                <Select placeholder="Chọn chi nhánh" allowClear={true}>
                                     {branchs.map((branch, key) => (
                                         <Option
                                             key={branch.id}

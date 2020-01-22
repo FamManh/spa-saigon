@@ -18,10 +18,10 @@ module.exports = {
   createLedger: {
     body: {
       vnname: Joi.string()
-        .min(3)
+        .allow("")
         .max(128),
       runame: Joi.string()
-        .min(3)
+        .allow("")
         .max(128),
       cash: Joi.number(),
       certificate: Joi.number(),
@@ -40,18 +40,16 @@ module.exports = {
   updateLedger: {
     body: {
       vnname: Joi.string()
-        .min(3)
+        .allow("")
         .max(128),
       runame: Joi.string()
-        .min(3)
+        .allow("")
         .max(128),
       cash: Joi.number(),
       certificate: Joi.number(),
       duration: Joi.number(),
-      staff: Joi.string()
-        .regex(/^[a-fA-F0-9]{24}$/),
-      shift: Joi.string()
-        .regex(/^[a-fA-F0-9]{24}$/),
+      staff: Joi.string().regex(/^[a-fA-F0-9]{24}$/),
+      shift: Joi.string().regex(/^[a-fA-F0-9]{24}$/),
       flag: Joi.boolean()
     },
     params: {
