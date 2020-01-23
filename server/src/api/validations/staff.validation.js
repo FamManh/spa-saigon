@@ -20,11 +20,11 @@ module.exports = {
   createStaff: {
     body: {
       name: Joi.string()
-        .min(3)
+        .min(1)
         .max(128)
         .required(),
       runame: Joi.string()
-        .min(3)
+        .min(1)
         .max(128),
       branch: Joi.string()
         .regex(/^[a-fA-F0-9]{24}$/)
@@ -39,10 +39,10 @@ module.exports = {
   replaceStaff: {
     body: {
       name: Joi.string()
-        .min(3)
+        .min(1)
         .max(128),
       runame: Joi.string()
-        .min(3)
+        .min(1)
         .max(128),
       branch: Joi.string().regex(/^[a-fA-F0-9]{24}$/),
       career: Joi.string().valid(Staff.careers)
@@ -58,10 +58,10 @@ module.exports = {
   updateStaff: {
     body: {
       name: Joi.string()
-        .min(3)
+        .min(1)
         .max(128),
       runame: Joi.string()
-        .min(3)
+        .min(1)
         .max(128),
       branch: Joi.string().regex(/^[a-fA-F0-9]{24}$/),
       career: Joi.string().valid(Staff.careers)

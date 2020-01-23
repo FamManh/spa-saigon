@@ -8,6 +8,7 @@ import service from "./ServicePage/reducer";
 import note from "./NotePage/reducer";
 import shift from "./ShiftPage/reducer";
 import ledger from "./LedgerPage/reducer";
+import report from "./ReportPage/reducer";
 
 export default history =>
     combineReducers({
@@ -19,5 +20,6 @@ export default history =>
         service,
         note,
         shift,
-        ledger
+        ledger,
+        report
     });

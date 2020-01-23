@@ -106,6 +106,7 @@ const noteReducer = (state = initialState, { type, payload }) =>
                 break;
             case NOTE_TOGGLE_VISIBLE:
                 draft.visible = !state.visible;
+                break;
             default:
                 return state;
         }

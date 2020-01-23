@@ -43,6 +43,15 @@ const privateRoutes = [
         exact: true
     },
     {
+        path: "/report",
+        exact: true,
+        loader: () => import("./ReportPage/list/ListPage"),
+        menu: true,
+        label: "Báo cáo",
+        permissionRequired: null,
+        icon: "bar-chart"
+    },
+    {
         path: "/ledger/:id",
         exact: true,
         loader: () => import("./LedgerPage/list/ListPage"),
