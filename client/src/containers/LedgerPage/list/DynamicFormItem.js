@@ -25,16 +25,6 @@ const DynamicFormItem = () => {
         dispatch(actions.doServiceItemsChange(name, value, index));
     };
 
-    const add = () => {
-        // setServiceItems([...serviceItems, serviceSchema]);
-    };
-
-    const remove = index => {
-        // let tempServiceItems = [...serviceItems];
-        // tempServiceItems.splice(index, 1);
-        // setServiceItems(tempServiceItems);
-    };
-
     const renderFormItem = () => {
         return serviceItems.map((service, key) => (
             <Row key={key} style={{ margin: "5px 0px" }}>

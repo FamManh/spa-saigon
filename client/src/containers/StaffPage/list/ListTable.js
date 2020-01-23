@@ -80,6 +80,7 @@ const ListTable = () => {
         <TableWrapper>
             <Table
                 rowKey="id"
+                scroll={{ y: 500, x: 1200 }}
                 loading={useSelector(selectors.selectDataLoading)}
                 columns={columns}
                 dataSource={staffs}

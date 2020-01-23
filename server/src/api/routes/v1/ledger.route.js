@@ -5,7 +5,7 @@ const { authorize, ADMIN, SUPERADMIN, LOGGED_USER } = require("../../middlewares
 const {
   listLedgers,
   createLedger,
-  replaceLedger,
+  reportLedger,
   updateLedger
 } = require("../../validations/ledger.validation");
 
@@ -15,6 +15,11 @@ const router = express.Router();
  * Load ledger when API with ledgerId route parameter is hit
  */
 router.param("ledgerId", controller.load);
+
+
+router
+  .route("/report")
+  .get(authorize(LOGGED_USER), validate(reportLedger), controller.report);
 
 router
   .route("/")
@@ -160,5 +165,6 @@ router
    * @apiError (Not Found 404)    NotFound      Ledger does not exist
    */
   .delete(authorize(ADMIN), controller.remove);
+
 
 module.exports = router;

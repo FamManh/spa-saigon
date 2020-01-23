@@ -16,7 +16,7 @@ const staffSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      minlength: 3,
+      minlength: 1,
       maxlength: 128,
       trim: true,
       unique: true,
@@ -24,7 +24,7 @@ const staffSchema = new mongoose.Schema(
     },
     runame: {
       type: String,
-      minlength: 3,
+      minlength: 1,
       maxlength: 128,
       trim: true
     },

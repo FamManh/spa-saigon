@@ -1,5 +1,5 @@
 const Joi = require('joi');
-
+const typesReport = ["staff"]
 module.exports = {
   // GET /v1/ledgers
   listLedgers: {
@@ -10,6 +10,18 @@ module.exports = {
         .max(100),
       shift: Joi.string()
         .regex(/^[a-fA-F0-9]{24}$/)
+        .required()
+    }
+  },
+
+  reportLedger: {
+    query: {
+      type: Joi.string()
+        .valid(typesReport)
+        .required(),
+      branch: Joi.string().regex(/^[a-fA-F0-9]{24}$/),
+      date: Joi.date()
+        .timestamp()
         .required()
     }
   },

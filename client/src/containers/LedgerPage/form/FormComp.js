@@ -1,4 +1,4 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, InputNumber } from "antd";
 import actions from "../actions";
 import selectors from "../selectors";
 import React, { useEffect } from "react";
@@ -68,13 +68,27 @@ const FormComp = ({ match, form }) => {
                         {form.getFieldDecorator("cash", {
                             initialValue:
                                 isEditing() && record ? record["cash"] : null
-                        })(<Input type="text" placeholder="Tiền mặt" />)}
+                        })(
+                            <InputNumber
+                                type="text"
+                                placeholder="Tiền mặt"
+                                style={{ width: "100%" }}
+                            />
+                        )}
                     </Form.Item>
                     <Form.Item label="Certificate">
                         {form.getFieldDecorator("certificate", {
                             initialValue:
-                                isEditing() && record ? record["certificate"] : null
-                        })(<Input type="text" placeholder="Certificate" />)}
+                                isEditing() && record
+                                    ? record["certificate"]
+                                    : null
+                        })(
+                            <InputNumber
+                                type="text"
+                                placeholder="Certificate"
+                                style={{ width: "100%" }}
+                            />
+                        )}
                     </Form.Item>
                     <Form.Item className="form-buttons" {...tailFormItemLayout}>
                         <Button

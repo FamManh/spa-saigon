@@ -66,6 +66,7 @@ const ListTable = () => {
                 columns={columns}
                 dataSource={branchs}
                 rowSelection={rowSelection}
+                scroll={{ y: 500, x: 1200 }}
                 onRow={record => ({
                     onClick: () => handleRowClick(record)
                 })}

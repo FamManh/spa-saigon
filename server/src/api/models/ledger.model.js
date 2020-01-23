@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const httpStatus = require("http-status");
 const { omitBy, isNil } = require("lodash");
 const APIError = require("../utils/APIError");
-const {ObjectId} = mongoose.Schema;
+const { ObjectId } = mongoose.Schema;
+const moment = require("moment");
 
 /**
  * Ledger Schema
@@ -112,6 +113,64 @@ ledgerSchema.statics = {
         .exec()
     );
   },
+  /**
+   * report ledgers.
+   *
+   * @param {number} type - Type of report ["staff", "month"].
+   * @param {number} branch - Ledger's branch id.
+   * @param {number} date - Date.
+   * @param {number} flag - Ledger flag.
+   * @returns {Promise<Ledger[]>}
+   */
+  report({ type, shiftIds, flag }) {
+    flag = flag ? flag = {$ne: !!flag} : null;
+    const options = omitBy({ flag }, isNil);
+    if (type === "staff") {
+      return this.aggregate([
+        {
+          $match: {
+            $and: [
+              {
+                shift: { $in: shiftIds }
+              },
+              options
+            ]
+          }
+        },
+        {
+          $lookup: {
+            from: "staffs",
+            localField: "staff",
+            foreignField: "_id",
+            as: "resultStaff"
+          }
+        },
+        { $unwind: { path: "$resultStaff" } },
+        {
+          $group: {
+            _id: "$resultStaff",
+            count: { $sum: 1 },
+            cash: { $sum: "$cash" },
+            certificate: { $sum: "$certificate" },
+            duration: { $sum: "$duration" }
+          }
+        },
+        {
+          $project: {
+            "_id.name": 1,
+            "_id._id": 1,
+            "_id.runame": 1,
+            "_id.career": 1,
+            "_id.branch": 1,
+            cash: 1,
+            duration: 1,
+            certificate: 1,
+            count: 1
+          }
+        }
+      ]).exec();
+    }
+  }
 };
 
 /**

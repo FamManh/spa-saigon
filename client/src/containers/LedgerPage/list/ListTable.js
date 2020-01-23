@@ -181,11 +181,20 @@ const ListTable = () => {
                 <>
                     {!!sumCashSelectedRow &&
                         descriptionTitle("Tiền mặt", sumCashSelectedRow)}
+
                     {!!sumCertificateSelectedRow &&
                         descriptionTitle(
                             "Certificate",
                             sumCertificateSelectedRow
                         )}
+
+                    {!!sumCashSelectedRow &&
+                        !!sumCertificateSelectedRow &&
+                        descriptionTitle(
+                            "Tổng",
+                            sumCertificateSelectedRow + sumCashSelectedRow
+                        )}
+                    
                 </>
             ) : (
                 <>
@@ -196,6 +205,7 @@ const ListTable = () => {
 
             <Table
                 rowKey="id"
+                scroll={{ y: 500, x: 1200 }}
                 loading={useSelector(selectors.selectDataLoading)}
                 columns={columns}
                 dataSource={ledgers}

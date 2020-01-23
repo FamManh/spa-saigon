@@ -112,7 +112,7 @@ shiftSchema.statics = {
    */
   list({ branch, date }) {
     const options = omitBy({ branch }, isNil);
-
+    date = Number(date);
     return this.find({
       $and: [
         {
