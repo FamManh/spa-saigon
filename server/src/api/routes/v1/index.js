@@ -20,7 +20,7 @@ router.get('/status', (req, res) => res.send('OK'));
  */
 router.use('/docs', express.static('docs'));
 
-router.use('/users', userRoutes);
+router.use('/user', userRoutes);
 router.use('/auth', authRoutes);
 router.use("/branch", branchRoutes);
 router.use("/staff", staffRoutes);

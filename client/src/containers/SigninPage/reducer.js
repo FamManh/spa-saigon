@@ -27,7 +27,7 @@ const signinReducer = (state = initialState, {type, payload})=>
             break;
         case SIGNIN_ERROR:
             draft.loading = false;
-            draft.error = payload.error || null;
+            // draft.error = payload.error || null;
             break;
         default:
             break;

@@ -28,7 +28,6 @@ exports.get = (req, res) => res.json(req.locals.branch.transform());
  */
 exports.create = async (req, res, next) => {
   try {
-    console.log(req.body);
     const branch = new Branch(req.body);
     const savedBranch = await branch.save();
     res.status(httpStatus.CREATED);

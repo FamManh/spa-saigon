@@ -35,7 +35,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "homepage": "http://manhpham.xyz/beta",
   "eslintConfig": {
     "extends": "react-app"
   },

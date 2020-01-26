@@ -33,7 +33,6 @@ exports.create = async (req, res, next) => {
     let date = moment(req.body.date).format('x');
     const shift = new Shift({...req.body, date});
     const isExists = await Shift.checkDuplicate(req.body.date, req.body.branch);
-    console.log(isExists);
     if (isExists && isExists.length > 0) {
       return res.status(409).json({
         id: isExists[0]._id,

@@ -1,6 +1,6 @@
-const httpStatus = require('http-status');
-const { omit } = require('lodash');
-const User = require('../models/user.model');
+const httpStatus = require("http-status");
+const { omit } = require("lodash");
+const User = require("../models/user.model");
 
 /**
  * Load user and append to req.
@@ -51,8 +51,8 @@ exports.replace = async (req, res, next) => {
   try {
     const { user } = req.locals;
     const newUser = new User(req.body);
-    const ommitRole = user.role !== 'admin' ? 'role' : '';
-    const newUserObject = omit(newUser.toObject(), '_id', ommitRole);
+    const ommitRole = user.role !== "admin" ? "role" : "";
+    const newUserObject = omit(newUser.toObject(), "_id", ommitRole);
 
     await user.updateOne(newUserObject, { override: true, upsert: true });
     const savedUser = await User.findById(user._id);
@@ -67,10 +67,8 @@ exports.replace = async (req, res, next) => {
  * Update existing user
  * @public
  */
-exports.update = (req, res, next) => {
-  const ommitRole = req.locals.user.role !== 'admin' ? 'role' : '';
-  const updatedUser = omit(req.body, ommitRole);
-  const user = Object.assign(req.locals.user, updatedUser);
+exports.update = async (req, res, next) => {
+  const user = Object.assign(req.locals.user, req.body);
 
   user
     .save()
@@ -97,9 +95,9 @@ exports.list = async (req, res, next) => {
  * @public
  */
 exports.remove = (req, res, next) => {
-  const { user } = req.locals;
-
-  user.remove()
+  const user = Object.assign(req.locals.user, { isActive: false});
+  user
+    .save()
     .then(() => res.status(httpStatus.NO_CONTENT).end())
     .catch(e => next(e));
 };

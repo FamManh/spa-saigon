@@ -34,7 +34,6 @@ const DynamicFormItem = ({ match, onChange, initialValue }) => {
         sauna: false
     };
     const [serviceItems, setServiceItems] = useState(null);
-        console.log(initialValue);
     const handleChange = (name, value, index) => {
         // console.log("name: " + name + " .value: " + value + ". key: " + index);
         // console.log(serviceItems);
