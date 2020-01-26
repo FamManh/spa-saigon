@@ -177,6 +177,40 @@ const privateRoutes = [
         label: "Thông tin chi nhánh",
         permissionRequired: null,
         exact: true
+    },
+    {
+        path: "/user",
+        exact: true,
+        loader: () => import("./UserPage/list/ListPage"),
+        menu: true,
+        label: "Người dùng",
+        permissionRequired: null,
+        icon: "user"
+    },
+    {
+        path: "/user/new",
+        exact: true,
+        loader: () => import("./UserPage/form/FormPage"),
+        menu: false,
+        label: "Tạo mới người dùng",
+        permissionRequired: null,
+        icon: "home"
+    },
+    {
+        path: "/user/:id/edit",
+        loader: () => import("./UserPage/form/FormPage"),
+        menu: false,
+        label: "Tạo mới người dùng",
+        permissionRequired: null,
+        exact: true
+    },
+    {
+        path: "/user/:id/view",
+        loader: () => import("./UserPage/view/ViewPage"),
+        menu: false,
+        label: "Thông tin người dùng",
+        permissionRequired: null,
+        exact: true
     }
 ];
 

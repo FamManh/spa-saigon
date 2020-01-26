@@ -33,6 +33,7 @@ exports.register = async (req, res, next) => {
     res.status(httpStatus.CREATED);
     return res.json({ token, user: userTransformed });
   } catch (error) {
+    console.log(error);
     return next(User.checkDuplicateUsername(error));
   }
 };
@@ -43,7 +44,6 @@ exports.register = async (req, res, next) => {
  */
 exports.login = async (req, res, next) => {
   try {
-    console.log('body: ' + req.body); 
     const { user, accessToken } = await User.findAndGenerateToken(req.body);
     const token = generateTokenResponse(user, accessToken);
     const userTransformed = user.transform();

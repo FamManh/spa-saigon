@@ -18,14 +18,16 @@ const handleJWT = (req, res, next, roles) => async (err, user, info) => {
 
   try {
     if (error || !user) throw error;
-    await logIn(user, { session: false });
+    await logIn(user, {
+      session: false
+    });
   } catch (e) {
     return next(apiError);
   }
 
   // check user role
   // if not exist => return error
-  if (roles.length && !User.roles.includes(roles)) {
+  if (!roles.length && !User.roles.includes(roles)) {
     apiError.status = httpStatus.FORBIDDEN;
     apiError.message = "Forbidden";
     return next(apiError);
@@ -38,7 +40,7 @@ const handleJWT = (req, res, next, roles) => async (err, user, info) => {
       req.user = user;
       return next();
     }
-    
+
     apiError.status = httpStatus.FORBIDDEN;
     apiError.message = "Forbidden";
     return next(apiError);
@@ -60,6 +62,7 @@ const handleJWT = (req, res, next, roles) => async (err, user, info) => {
 
 exports.ADMIN = ADMIN;
 exports.LOGGED_USER = LOGGED_USER;
+exports.SUPERADMIN = SUPERADMIN;
 
 exports.authorize = (roles = User.roles) => (req, res, next) =>
   passport.authenticate(

@@ -9,6 +9,7 @@ import note from "./NotePage/reducer";
 import shift from "./ShiftPage/reducer";
 import ledger from "./LedgerPage/reducer";
 import report from "./ReportPage/reducer";
+import user from "./UserPage/reducer";
 
 export default history =>
     combineReducers({
@@ -21,5 +22,6 @@ export default history =>
         note,
         shift,
         ledger,
-        report
+        report,
+        user
     });
