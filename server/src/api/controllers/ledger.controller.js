@@ -29,7 +29,14 @@ exports.get = (req, res) => res.json(req.locals.ledger.transform());
  */
 exports.create = async (req, res, next) => {
   try {
-    if (req.locals.ledger.shift.lock) {
+    const shift = await Shift.findById(req.body.shift);
+    if(!shift){
+      throw new APIError({
+        message: "Ca hiện tại không hợp lệ",
+        status: httpStatus.BAD_REQUEST
+      });
+    }
+    if (shift && shift.lock) {
       throw new APIError({
         message: "Ca hiện tại đã đóng, vui lòng mở Ca để chỉnh sửa",
         status: httpStatus.BAD_REQUEST
