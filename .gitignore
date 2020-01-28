@@ -53,7 +53,7 @@ client/coverage
 client/build
 client/node_modules
 client/stats.json
-
+client/.env
 # Cruft
 client/.DS_Store
 client/npm-debug.log

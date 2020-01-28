@@ -82,6 +82,7 @@ exports.update = async (req, res, next) => {
  */
 exports.list = async (req, res, next) => {
   try {
+    console.log("hehehehhehehe")
     const users = await User.list(req.query);
     const transformedUsers = users.map(user => user.transform());
     res.json(transformedUsers);

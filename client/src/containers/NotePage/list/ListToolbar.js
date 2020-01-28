@@ -6,7 +6,7 @@ import selectors from "../selectors";
 import actions from "../actions";
 const InputGroup = Input.Group;
 const  ListToolbar = () => {
-    const dataLoading = useSelector(selectors.selectDataLoading);
+    // const dataLoading = useSelector(selectors.selectDataLoading);
     const saveLoading = useSelector(selectors.selectSaveLoading);
     const dispatch = useDispatch();
     const [note, setNote] = useState("")
@@ -16,9 +16,9 @@ const  ListToolbar = () => {
  
 
    
-    const onReload = () => {
-        dispatch(actions.list());
-    }
+    // const onReload = () => {
+    //     dispatch(actions.list());
+    // }
 
     const onSubmit = (event)=>{
         event.preventDefault();

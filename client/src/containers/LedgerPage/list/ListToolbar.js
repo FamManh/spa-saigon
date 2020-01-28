@@ -6,7 +6,6 @@ import shiftActions from '../../ShiftPage/actions';
 import shiftSelectors from "../../ShiftPage/selectors";
 import selectors from "../selectors";
 import actions from "../actions";
-import { useLocation } from "react-router-dom";
 
 const ListToolbar = () => {
     const destroyLoading = useSelector(selectors.selectDestroyLoading);
