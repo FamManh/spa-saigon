@@ -43,42 +43,42 @@ const ListToolbar = () => {
         return button;
     };
 
-    let renderDestroyButton = () => {
-        const disabled =
-            (selectedRowKeys && !selectedRowKeys.length) || dataLoading;
+    // let renderDestroyButton = () => {
+    //     const disabled =
+    //         (selectedRowKeys && !selectedRowKeys.length) || dataLoading;
 
-        const button = (
-            <Button
-                disabled={disabled}
-                loading={destroyLoading}
-                type="primary"
-                icon="delete"
-            >
-                Xóa
-            </Button>
-        );
+    //     const button = (
+    //         <Button
+    //             disabled={disabled}
+    //             loading={destroyLoading}
+    //             type="primary"
+    //             icon="delete"
+    //         >
+    //             Xóa
+    //         </Button>
+    //     );
 
-        const buttonWithConfirm = (
-            <Popconfirm
-                title="Bạn có chắc chắn muốn xóa?"
-                onConfirm={() => doDestroyAllSelected()}
-                okText="Chắc chắn"
-                cancelText="Hủy"
-            >
-                {button}
-            </Popconfirm>
-        );
+    //     const buttonWithConfirm = (
+    //         <Popconfirm
+    //             title="Bạn có chắc chắn muốn xóa?"
+    //             onConfirm={() => doDestroyAllSelected()}
+    //             okText="Chắc chắn"
+    //             cancelText="Hủy"
+    //         >
+    //             {button}
+    //         </Popconfirm>
+    //     );
 
-        if (disabled) {
-            return (
-                <Tooltip title="Vui lòng chọn những trường muốn xóa">
-                    {button}
-                </Tooltip>
-            );
-        }
+    //     if (disabled) {
+    //         return (
+    //             <Tooltip title="Vui lòng chọn những trường muốn xóa">
+    //                 {button}
+    //             </Tooltip>
+    //         );
+    //     }
 
-        return buttonWithConfirm;
-    };
+    //     return buttonWithConfirm;
+    // };
 
     return (
         <Toolbar>

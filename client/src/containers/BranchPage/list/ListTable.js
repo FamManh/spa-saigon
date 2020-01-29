@@ -66,12 +66,11 @@ const ListTable = () => {
                 columns={columns}
                 dataSource={branchs}
                 rowSelection={rowSelection}
-                scroll={{ y: 500, x: 1200 }}
                 onRow={record => ({
                     onClick: () => handleRowClick(record)
                 })}
                 // footer={()=>branchs.length + ' chi nhánh'}
-                scroll={{ x: 500, y: 900 }}
+                scroll={{ x: 1000, y: 500 }}
                 bordered={true}
                 pagination={false}
             />

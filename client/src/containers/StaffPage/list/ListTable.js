@@ -80,7 +80,6 @@ const ListTable = () => {
         <TableWrapper>
             <Table
                 rowKey="id"
-                scroll={{ y: 500, x: 1200 }}
                 loading={useSelector(selectors.selectDataLoading)}
                 columns={columns}
                 dataSource={staffs}
@@ -89,7 +88,7 @@ const ListTable = () => {
                     onClick: () => handleRowClick(record)
                 })}
                 // footer={()=>staffs.length + ' nhân viên'}
-                scroll={{ x: 500, y: 900 }}
+                scroll={{ x: 800, y: 500 }}
                 bordered={true}
                 pagination={false}
             />

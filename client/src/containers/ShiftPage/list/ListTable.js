@@ -107,7 +107,7 @@ const ListTable = () => {
                     onClick: () => handleRowClick(record)
                 })}
                 // footer={()=>shifts.length + ' chi nhánh'}
-                scroll={{ x: 500, y: 900 }}
+                scroll={{ x: 1000, y: 500 }}
                 bordered={true}
                 pagination={false}
             />

@@ -8,7 +8,6 @@ import FilterWrapper, {
 } from "../../shared/styles/FilterWrapper";
 import moment from 'moment';
 import { useSelector, useDispatch } from "react-redux";
-import { tailFormItemLayout } from "../../shared/styles/FormWrapper";
 import selectors from "../selectors";
 const {Option} = Select;
 const { MonthPicker } = DatePicker;

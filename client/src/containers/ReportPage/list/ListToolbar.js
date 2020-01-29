@@ -1,10 +1,9 @@
 import React from "react";
 import Toolbar from "../../shared/styles/Toolbar";
-import { Button, Tooltip, Popconfirm } from "antd";
+import { Button, Tooltip } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import selectors from "../selectors";
 import actions from "../actions";
-import { Link } from "react-router-dom";
 
 const ListToolbar = () => {
     const dataLoading = useSelector(selectors.selectDataLoading);

@@ -1,10 +1,9 @@
-import { Table, Popconfirm, Tag } from "antd";
+import { Table, Tag } from "antd";
 import actions from "../actions";
 import selectors from "../selectors";
 import React from "react";
 import { Link } from "react-router-dom";
 import TableWrapper from "../../shared/styles/TableWrapper";
-import ButtonLink from "../../shared/styles/ButtonLink";
 import { useSelector, useDispatch } from "react-redux";
 
 
@@ -13,9 +12,9 @@ const ListTable = () => {
     const dispatch = useDispatch();
     const selectedRowKeys = useSelector(selectors.selectSelectedRowKeys)
     const users = useSelector(selectors.selectUsers);
-    let doDestroy = record => {
-        dispatch(actions.doUpdate(record.id, {isActive: !record.isActive}));
-    };
+    // let doDestroy = record => {
+    //     dispatch(actions.doUpdate(record.id, {isActive: !record.isActive}));
+    // };
 
     let columns = [
         {
@@ -84,12 +83,11 @@ const ListTable = () => {
                 columns={columns}
                 dataSource={users}
                 rowSelection={rowSelection}
-                scroll={{ y: 500, x: 1200 }}
                 onRow={record => ({
                     onClick: () => handleRowClick(record)
                 })}
                 // footer={()=>users.length + ' chi nhánh'}
-                scroll={{ x: 500, y: 900 }}
+                scroll={{ x: 1000, y: 500 }}
                 bordered={true}
                 pagination={false}
             />
