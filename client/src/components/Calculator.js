@@ -1,12 +1,6 @@
 import React, {useState} from 'react';
 import { Input, Icon, Menu, Dropdown } from "antd";
 
-const handleClick = () => {
-    console.log("Click")
-}
-
-
-
 function Calculator() {
     const [history, setHistory] = useState([]);
     const [text, setText] = useState("")
@@ -39,7 +33,7 @@ function Calculator() {
                     <Icon type="caret-down" />
                 </Dropdown>
             }
-            defaultValue="Ô tính"
+            placeholder="Ô tính"
         />
     );
 }

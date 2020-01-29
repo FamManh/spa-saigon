@@ -200,12 +200,12 @@ const ListForm = ({ form }) => {
                         </Button>
                     </Col>
                 </Row>
-                <Row>
-                    <Col span={24}>
-                       <Calculator/>
-                    </Col>
-                </Row>
             </Form>
+            <Row>
+                <Col span={24}>
+                    <Calculator />
+                </Col>
+            </Row>
         </FilterWrapper>
     );
 };
