@@ -6,10 +6,12 @@ import noteSelectors from "../NotePage/selectors";
 import actions from './actions';
 import noteActions from "../NotePage/actions";
 import {useDispatch, useSelector} from 'react-redux';
+import { isAuthenticated } from '../shared/routes/permissionChecker';
 const { Header: AntHeader } = Layout;
 
 
 const Header = () => {
+  const ssauth = JSON.parse(window.localStorage.getItem("ssauth"));
   const dispatch = useDispatch();
   const noteUnReadCount = useSelector(noteSelectors.selectUnReadCount);
   let doSignout = () => {
@@ -65,7 +67,7 @@ const Header = () => {
                     <Dropdown
                         className="user-dropdown"
                         overlay={userMenu}
-                        trigger={["click"]}
+                        ssauth
                     >
                         <span>
                             <Avatar
@@ -74,7 +76,9 @@ const Header = () => {
                                 src={undefined}
                                 alt="avatar"
                             />
-                            <span className="user-dropdown-text">Manh</span>
+                            <span className="user-dropdown-text">
+                                {ssauth && ssauth.user && ssauth.user.username.toUpperCase()}
+                            </span>
                         </span>
                     </Dropdown>
                 </div>

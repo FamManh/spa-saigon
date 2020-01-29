@@ -22,6 +22,10 @@ router
   .get(authorize(LOGGED_USER), validate(reportLedger), controller.report);
 
 router
+  .route("/info")
+  .get(controller.info);
+
+router
   .route("/")
   /**
    * @api {get} v1/ledgers List Ledgers

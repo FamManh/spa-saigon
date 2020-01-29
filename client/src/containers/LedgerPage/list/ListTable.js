@@ -40,7 +40,10 @@ const ListTable = () => {
         {
             title: "Tên dịch vụ",
             dataIndex: "vnname",
-            key: "vnname",
+            // key: "vnname",
+            render: (_, record) => {
+                return record.flag ? <Text type="danger">{_}</Text> : _;
+            },
             sorter: (a, b) => a.vnname.length - b.vnname.length
         },
         {

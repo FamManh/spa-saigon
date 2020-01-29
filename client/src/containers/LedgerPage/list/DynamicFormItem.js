@@ -71,7 +71,7 @@ const DynamicFormItem = () => {
                     <InputNumber
                         value={service.cash}
                         name="cash"
-                        onChange={value => handleChange("price", value, key)}
+                        onChange={value => handleChange("cash", value, key)}
                         placeholder="Tiền mặt"
                         style={{ width: "100%" }}
                     />

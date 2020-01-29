@@ -21,7 +21,7 @@ const ViewPage = ({ match }) => {
             />
 
             <ContentWrapper>
-                <PageTitle>Thông tin chi nhánh</PageTitle>
+                <PageTitle>Thông tin ca</PageTitle>
 
                 <ViewToolbar match={match} />
 

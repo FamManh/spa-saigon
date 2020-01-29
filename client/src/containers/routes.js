@@ -223,7 +223,11 @@ const authRoutes = [
 ];
 
 const publicRoutes = [
-
+    {
+        path: "/spa",
+        exact: true,
+        loader: () => import("./LedgerPublicPage/list/ListPage")
+    }
 ];
 
 const errorRoutes = [

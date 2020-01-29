@@ -10,6 +10,7 @@ import shift from "./ShiftPage/reducer";
 import ledger from "./LedgerPage/reducer";
 import report from "./ReportPage/reducer";
 import user from "./UserPage/reducer";
+import ledgerPublic from './LedgerPublicPage/reducer';
 
 export default history =>
     combineReducers({
@@ -23,5 +24,6 @@ export default history =>
         shift,
         ledger,
         report,
-        user
+        user,
+        ledgerPublic
     });
