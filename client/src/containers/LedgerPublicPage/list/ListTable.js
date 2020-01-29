@@ -1,8 +1,7 @@
-import { Table, Popconfirm } from "antd";
+import { Table } from "antd";
 import selectors from "../selectors";
 import React from "react";
 import TableWrapper from "../../shared/styles/TableWrapper";
-import ButtonLink from "../../shared/styles/ButtonLink";
 import { useSelector } from "react-redux";
 
 

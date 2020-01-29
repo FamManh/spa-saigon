@@ -1,7 +1,7 @@
 import { Button, Form, Input, Select, Divider } from "antd";
 import actions from "../actions";
 import selectors from "../selectors";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Spinner from "../../shared/Spinner";
 import FormWrapper, {
     tailFormItemLayout,

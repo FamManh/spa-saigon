@@ -9,6 +9,7 @@ import FilterWrapper from "../../shared/styles/FilterWrapper";
 import { useSelector, useDispatch } from "react-redux";
 import DynamicFormItem from "./DynamicFormItem";
 import Text from "antd/lib/typography/Text";
+import Calculator from "../../../components/Calculator";
 const { Option } = Select;
 
 const descriptionTitle = (label, content) => {
@@ -197,6 +198,11 @@ const ListForm = ({ form }) => {
                         >
                             Thêm tua
                         </Button>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={24}>
+                       <Calculator/>
                     </Col>
                 </Row>
             </Form>

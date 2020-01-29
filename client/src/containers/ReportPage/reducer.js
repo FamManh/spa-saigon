@@ -27,7 +27,6 @@ const initialState = {
     sumCertificate: 0,
     sumCashSelectedRow: 0,
     sumCertificateSelectedRow: 0,
-    sumCertificateSelectedRow: 0
 };
 
 const calculateFields = (data, field) => {

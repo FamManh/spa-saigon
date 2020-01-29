@@ -12,13 +12,9 @@ import {
     REPORT_TABLE_ROW_SELECTION,
     REPORT_TABLE_ROW_CLICK
 } from "./constants";
-import { getHistory } from "../configureStore";
-import Message from "../shared/message";
 import Errors from "../shared/error/errors";
-import moment from "moment";
 import services from "./service";
 import { Excel } from "../shared/excel/excel";
-import branchSelectors from "../BranchPage/selectors";
 const excelHeaderSchema = [];
 
 const groupBy = (data, field) => {

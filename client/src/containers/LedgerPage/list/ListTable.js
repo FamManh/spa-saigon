@@ -197,7 +197,6 @@ const ListTable = () => {
                             "Tổng",
                             sumCertificateSelectedRow + sumCashSelectedRow
                         )}
-                    
                 </>
             ) : (
                 <>
@@ -208,7 +207,6 @@ const ListTable = () => {
 
             <Table
                 rowKey="id"
-                scroll={{ y: 500, x: 1200 }}
                 loading={useSelector(selectors.selectDataLoading)}
                 columns={columns}
                 dataSource={ledgers}
@@ -217,7 +215,7 @@ const ListTable = () => {
                     onClick: () => handleRowClick(record)
                 })}
                 // footer={()=>ledgers.length + ' chi nhánh'}
-                scroll={{ x: 500, y: 900 }}
+                scroll={{ x: 1200, y: 500 }}
                 bordered={true}
                 pagination={false}
             />

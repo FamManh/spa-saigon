@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Drawer, Button, Divider, Checkbox, Input } from "antd";
+import { Drawer, Button, Divider, Checkbox } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import selectors from "../selectors";
 import actions from "../actions";

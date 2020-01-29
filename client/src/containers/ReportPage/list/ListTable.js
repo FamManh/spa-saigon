@@ -1,12 +1,9 @@
-import { Table, Popconfirm, Icon } from "antd";
+import { Table } from "antd";
 import actions from "../actions";
 import selectors from "../selectors";
 import React from "react";
-import { Link } from "react-router-dom";
 import TableWrapper from "../../shared/styles/TableWrapper";
-import ButtonLink from "../../shared/styles/ButtonLink";
 import { useSelector, useDispatch } from "react-redux";
-import moment from "moment";
 import Text from "antd/lib/typography/Text";
 
 const descriptionTitle = (label, content) => {
@@ -115,7 +112,6 @@ const ListTable = () => {
             )}
             <Table
                 rowKey={record => record._id._id}
-                scroll={{ y: 500, x: 1200 }}
                 loading={useSelector(selectors.selectDataLoading)}
                 columns={columns}
                 dataSource={reports}
@@ -123,8 +119,9 @@ const ListTable = () => {
                 onRow={record => ({
                     onClick: () => handleRowClick(record)
                 })}
+                size="small"
                 // footer={()=>reports.length + ' chi nhánh'}
-                scroll={{ x: 500, y: 900 }}
+                scroll={{ x: 1000}}
                 bordered={true}
                 pagination={false}
             />

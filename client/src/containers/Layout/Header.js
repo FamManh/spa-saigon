@@ -6,7 +6,6 @@ import noteSelectors from "../NotePage/selectors";
 import actions from './actions';
 import noteActions from "../NotePage/actions";
 import {useDispatch, useSelector} from 'react-redux';
-import { isAuthenticated } from '../shared/routes/permissionChecker';
 const { Header: AntHeader } = Layout;
 
 

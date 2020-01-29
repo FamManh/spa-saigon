@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ContentWrapper from "../../Layout/styles/ContentWrapper";
 import PageTitle from "../../shared/styles/PageTitle";
-import { useDispatch } from "react-redux";
-import actions from '../actions';
 import ListTable from "./ListTable";
 import ListFilter from "./ListFilter";
 
