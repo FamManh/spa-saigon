@@ -29,6 +29,7 @@ import {
     LEDGER_DISCOUNT_CHANGE,
     LEDGER_PAYMENT_METHOD_CHANGE,
     LEDGER_SERVICE_ITEM_ADD_CLICK,
+    LEDGER_SERVICE_ITEM_REMOVE_CLICK,
 } from "./constants";
 import Message from "../shared/message";
 import Errors from "../shared/error/errors";
@@ -281,7 +282,8 @@ const actions = {
     },
     doServiceItemRemoveClick: index => dispatch => {
         dispatch({
-            type: index
+            type: LEDGER_SERVICE_ITEM_REMOVE_CLICK,
+            payload: index
         });
     },
     doLinkChange: () => dispatch => {

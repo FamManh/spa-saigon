@@ -2,7 +2,7 @@ const httpStatus = require("http-status");
 const Ledger = require("../models/ledger.model");
 const Shift = require("../models/shift.model");
 const APIError = require("../utils/APIError");
-
+const moment = require('moment');
 /**
  * Load ledger and append to req.
  * @public
@@ -30,7 +30,7 @@ exports.get = (req, res) => res.json(req.locals.ledger.transform());
 exports.create = async (req, res, next) => {
   try {
     const shift = await Shift.findById(req.body.shift);
-    if(!shift){
+    if (!shift) {
       throw new APIError({
         message: "Ca hiện tại không hợp lệ",
         status: httpStatus.BAD_REQUEST
@@ -120,6 +120,45 @@ exports.report = async (req, res, next) => {
       shiftIds.push(shift._id);
     });
     const ledgers = await Ledger.report({ ...req.query, shiftIds });
+    // const transformedLedgers = ledgers.map(ledger => ledger.transform());
+    res.json(ledgers);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.info = async (req, res, next) => {
+  try {
+
+    let date = Number(req.query.date);
+    const shift = await Shift.findOne({
+      $and: [
+        {
+          date: {
+            $gte: moment(date)
+              .startOf("day")
+              .toDate(),
+            $lte: moment(date)
+              .endOf("day")
+              .toDate()
+          }
+        },
+        { branch: req.query.branch }
+      ]
+    }).exec();
+    if(!shift){
+      throw new APIError({
+        message: "Không có dữ liệu",
+        status: httpStatus.BAD_REQUEST
+      });
+    }
+    const ledgers = await Ledger.find({ shift: shift.id }).populate("staff", "name");
+    if (!ledgers) {
+      throw new APIError({
+        message: "Không có dữ liệu",
+        status: httpStatus.BAD_REQUEST
+      });
+    }
     // const transformedLedgers = ledgers.map(ledger => ledger.transform());
     res.json(ledgers);
   } catch (error) {

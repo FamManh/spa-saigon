@@ -1,13 +1,4 @@
-import {
-    Button,
-    Col,
-    Form,
-    Row,
-    Select,
-    Tooltip,
-    Divider,
-    Radio
-} from "antd";
+import { Button, Col, Form, Row, Select, Tooltip, Divider, Radio } from "antd";
 import actions from "../actions";
 import selectors from "../selectors";
 import serviceActions from "../../ServicePage/actions";
@@ -17,7 +8,25 @@ import React, { useEffect } from "react";
 import FilterWrapper from "../../shared/styles/FilterWrapper";
 import { useSelector, useDispatch } from "react-redux";
 import DynamicFormItem from "./DynamicFormItem";
+import Text from "antd/lib/typography/Text";
 const { Option } = Select;
+
+const descriptionTitle = (label, content) => {
+    return (
+        <Text style={{ fontSize: "14px", margin: "0px 5px" }}>
+            {label}: <Text strong>{content}</Text>
+        </Text>
+    );
+};
+
+const calculateFields = (data, field) => {
+    let sum = 0;
+    data.forEach(item => {
+        sum += item[field];
+    });
+    return sum;
+};
+
 const ListForm = ({ form }) => {
     const dispatch = useDispatch();
     const services = useSelector(serviceSelectors.selectServices);
@@ -71,7 +80,6 @@ const ListForm = ({ form }) => {
     useEffect(() => {
         dispatch(serviceActions.list());
     }, []);
-
     return (
         <FilterWrapper>
             <Form
@@ -141,6 +149,24 @@ const ListForm = ({ form }) => {
                         <Radio.Button value={20}>20</Radio.Button>
                     </Radio.Group>
                     {/* <InputNumber  onChange={async value => {await this.setState({discount: value}); this.calculatePrice()}} min={0} max={100} defaultValue={0}/> */}
+                    {!!serviceItems.length &&
+                        descriptionTitle(
+                            "Tiền mặt",
+                            calculateFields(serviceItems, "cash")
+                        )}
+                    {!!serviceItems.length &&
+                        descriptionTitle(
+                            "Certificate",
+                            calculateFields(serviceItems, "certificate")
+                        )}
+                    {!!serviceItems.length &&
+                        !!calculateFields(serviceItems, "certificate") &&
+                        !!calculateFields(serviceItems, "cash") &&
+                        descriptionTitle(
+                            "Tổng",
+                            calculateFields(serviceItems, "certificate") +
+                                calculateFields(serviceItems, "cash")
+                        )}
                 </Form.Item>
                 <DynamicFormItem />
                 <Divider orientation="left">
