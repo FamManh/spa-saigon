@@ -8,7 +8,10 @@ module.exports = {
       perPage: Joi.number()
         .min(1)
         .max(100),
-      date: Joi.date()
+      start: Joi.date()
+        .timestamp()
+        .required(),
+      start: Joi.date()
         .timestamp()
         .required(),
       branch: Joi.string()

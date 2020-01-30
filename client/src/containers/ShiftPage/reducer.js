@@ -19,9 +19,13 @@ import {
     SHIFT_EXPORT_ERROR,
     SHIFT_ERROR_MESSAGE_CLEAR,
     SHIFT_TABLE_ROW_SELECTION,
-    SHIFT_TABLE_ROW_CLICK
+    SHIFT_TABLE_ROW_CLICK,
+    SHIFT_FILTER_CHANGE
 } from "./constants";
 import produce from "immer";
+import moment from "moment";
+const monthFormat = "YYYY/MM";
+
 const initialState = {
     initLoading: true,
     dataLoading: false,
@@ -34,12 +38,19 @@ const initialState = {
     selectedRowKeys: [],
     selectedRows: [],
     record: null,
-    shifts: []
+    shifts: [],
+    filter: {
+        date: moment(new Date()),
+        branch: ""
+    }
 };
 
 const shiftReducer = (state = initialState, { type, payload }) =>
     produce(state, draft => {
         switch (type) {
+            case SHIFT_FILTER_CHANGE:
+                draft.filter = payload;
+                break;
             case SHIFT_CREATE_START:
                 draft.saveLoading = true;
                 draft.error = null;

@@ -154,9 +154,9 @@ const ledgerReducer = (state = initialState, { type, payload }) =>
                 draft.selectedRows = [];
                 draft.sumCashSelectedRow = 0;
                 draft.sumCertificateSelectedRow = 0;
-                draft.sumCash = calculateFields(state.ledgers, "cash");
+                draft.sumCash = calculateFields(draft.ledgers, "cash");
                 draft.sumCertificate = calculateFields(
-                    state.ledgers,
+                    draft.ledgers,
                     "certificate"
                 );
                 draft.error = null;
@@ -229,7 +229,6 @@ const ledgerReducer = (state = initialState, { type, payload }) =>
                 if (state.clear) {
                     draft.serviceItems = payload;
                 } else {
-                    console.log(payload);
                     draft.serviceItems = state.serviceItems.concat(payload);
                 }
                 break;

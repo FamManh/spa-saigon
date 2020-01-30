@@ -48,6 +48,11 @@ const selectSelectedRows = createSelector(
     shift => shift.selectedRows
 );
 
+const selectFilter = createSelector(
+    [selectRaw],
+    shift => shift.filter
+);
+
 
 
 const selectors = {
@@ -61,7 +66,8 @@ const selectors = {
     selectDestroyLoading,
     selectRecord,
     selectFindLoading,
-    selectExportLoading
+    selectExportLoading,
+    selectFilter
 };
 
 export default selectors;

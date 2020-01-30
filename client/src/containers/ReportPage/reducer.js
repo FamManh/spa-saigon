@@ -10,8 +10,10 @@ import {
     REPORT_EXPORT_ERROR,
     REPORT_ERROR_MESSAGE_CLEAR,
     REPORT_TABLE_ROW_SELECTION,
-    REPORT_TABLE_ROW_CLICK
+    REPORT_TABLE_ROW_CLICK,
+    REPORT_FILTER_CHANGE
 } from "./constants";
+import moment from 'moment';
 import produce from "immer";
 const initialState = {
     dataLoading: false,
@@ -27,6 +29,13 @@ const initialState = {
     sumCertificate: 0,
     sumCashSelectedRow: 0,
     sumCertificateSelectedRow: 0,
+    filter: {
+        start: moment(new Date()).startOf("month"),
+        end: moment(new Date()).endOf("month"),
+        flag: true,
+        groupByBranch: false,
+        branch: ""
+    }
 };
 
 const calculateFields = (data, field) => {
@@ -40,6 +49,9 @@ const calculateFields = (data, field) => {
 const reportReducer = (state = initialState, { type, payload }) =>
     produce(state, draft => {
         switch (type) {
+            case REPORT_FILTER_CHANGE:
+                draft.filter = payload;
+                break;
             case REPORT_GET_START:
                 draft.dataLoading = true;
                 draft.selectedRowKeys = [];
@@ -51,11 +63,11 @@ const reportReducer = (state = initialState, { type, payload }) =>
             case REPORT_GET_SUCCESS:
                 draft.dataLoading = false;
                 draft.reports = payload;
-                 draft.sumCash = calculateFields(draft.reports, "cash");
-                 draft.sumCertificate = calculateFields(
-                     draft.reports,
-                     "certificate"
-                 );
+                draft.sumCash = calculateFields(draft.reports, "cash");
+                draft.sumCertificate = calculateFields(
+                    draft.reports,
+                    "certificate"
+                );
                 draft.sumCash = calculateFields(draft.reports, "cash");
                 draft.sumCertificate = calculateFields(
                     draft.reports,
@@ -143,14 +155,14 @@ const reportReducer = (state = initialState, { type, payload }) =>
                     state.reports,
                     "certificate"
                 );
-                 draft.sumCashSelectedRow = calculateFields(
-                     draft.selectedRows,
-                     "cash"
-                 );
-                 draft.sumCertificateSelectedRow = calculateFields(
-                     draft.selectedRows,
-                     "certificate"
-                 );
+                draft.sumCashSelectedRow = calculateFields(
+                    draft.selectedRows,
+                    "cash"
+                );
+                draft.sumCertificateSelectedRow = calculateFields(
+                    draft.selectedRows,
+                    "certificate"
+                );
                 break;
             default:
                 break;

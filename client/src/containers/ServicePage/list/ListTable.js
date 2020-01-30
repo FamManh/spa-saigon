@@ -22,19 +22,25 @@ const ListTable = () => {
             title: "Code",
             dataIndex: "code",
             key: "code",
-            sorter: (a, b) => a.code.length - b.code.length
+            sorter: (a, b) => {
+                return a.code.localeCompare(b.code);
+            }
         },
         {
             title: "Tên",
             dataIndex: "name",
             key: "name",
-            sorter: (a, b) => a.name.length - b.name.length
+            sorter: (a, b) => {
+                return a.name.localeCompare(b.name);
+            }
         },
         {
             title: "Chi nhánh",
             dataIndex: "branch.name",
             key: "branch.name",
-            sorter: (a, b) => a.branch.name.length - b.branch.name.length
+            sorter: (a, b) => {
+                return a.branch.name.localeCompare(b.branch.name);
+            }
         },
         {
             title: "",

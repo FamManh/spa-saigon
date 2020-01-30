@@ -22,25 +22,33 @@ const ListTable = () => {
             title: "Tên",
             dataIndex: "name",
             key: "name",
-            sorter: (a, b) => a.name.length - b.name.length
+            sorter: (a, b) => {
+                return a.name.localeCompare(b.name);
+            }
         },
         {
             title: "Tên tiếng nga",
             dataIndex: "runame",
             key: "runame",
-            sorter: (a, b) => a.runame.length - b.runame.length
+            sorter: (a, b) => {
+                return a.runame.localeCompare(b.runame);
+            }
         },
         {
             title: "Chức vụ",
             dataIndex: "career",
             key: "career",
-            sorter: (a, b) => a.career.length - b.career.length
+            sorter: (a, b) => {
+                return a.career.localeCompare(b.career);
+            }
         },
         {
             title: "Chi nhánh",
             dataIndex: "branch.name",
             key: "branch.name",
-            sorter: (a, b) => a.branch.name.length - b.branch.name.length
+            sorter: (a, b) => {
+                return a.branch.name.localeCompare(b.branch.name);
+            }
         },
         {
             title: "",

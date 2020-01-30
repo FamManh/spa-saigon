@@ -226,7 +226,11 @@ const publicRoutes = [
     {
         path: "/spa",
         exact: true,
-        loader: () => import("./LedgerPublicPage/list/ListPage")
+        loader: () => import("./LedgerPublicPage/list/ListPage"),
+        menu: true,
+        label: "Tua",
+        permissionRequired: null,
+        icon: "sliders"
     }
 ];
 

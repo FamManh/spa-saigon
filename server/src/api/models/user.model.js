@@ -164,7 +164,7 @@ userSchema.statics = {
       username
     }).exec();
     const err = {
-      status: httpStatus.UNAUTHORIZED,
+      status: httpStatus.BAD_REQUEST,
       isPublic: true
     };
     if (user && !user.isActive) {
