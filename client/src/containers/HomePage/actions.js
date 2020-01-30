@@ -19,8 +19,6 @@ const actions = {
             
             // call api: signin 
             let response = await fetchSignin(username, password);
-            
-            console.log(response);
 
             window.localStorage.setItem("ssauth", JSON.stringify(response.data));
             dispatch({ type: SIGNIN_SUCCESS, payload: response.data });

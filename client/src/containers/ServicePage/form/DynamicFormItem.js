@@ -35,12 +35,6 @@ const DynamicFormItem = ({ match, onChange, initialValue }) => {
     };
     const [serviceItems, setServiceItems] = useState(null);
     const handleChange = (name, value, index) => {
-        // console.log("name: " + name + " .value: " + value + ". key: " + index);
-        // console.log(serviceItems);
-        // let tempServiceItem = [...serviceItems];
-        // tempServiceItem[index][name] = value;
-        // // console.log(tempServiceItem);
-        // setServiceItems(tempServiceItem);
 
         let temp = serviceItems.map(({ ...val }, key) => {
             if (index === key) {

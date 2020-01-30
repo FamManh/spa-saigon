@@ -19,7 +19,8 @@ import {
     SHIFT_EXPORT_ERROR,
     SHIFT_ERROR_MESSAGE_CLEAR,
     SHIFT_TABLE_ROW_SELECTION,
-    SHIFT_TABLE_ROW_CLICK
+    SHIFT_TABLE_ROW_CLICK,
+    SHIFT_FILTER_CHANGE
 } from "./constants";
 import { getHistory } from "../configureStore";
 import Message from "../shared/message";
@@ -40,7 +41,14 @@ const actions = {
         return { type: SHIFT_ERROR_MESSAGE_CLEAR };
     },
 
-    list: (filter) => async dispatch => {
+    doFilterChange: (data) => {
+        return {
+            type: SHIFT_FILTER_CHANGE,
+            payload: data
+        };
+    },
+
+    list: filter => async dispatch => {
         try {
             dispatch({ type: SHIFT_GET_START });
             let response = await services.listFn(filter);
@@ -143,12 +151,11 @@ const actions = {
                     error.response.data.id
                         ? error.response.data.id
                         : null;
-                if (shiftId){
+                if (shiftId) {
                     getHistory().push(`/ledger/${shiftId}`);
                     return;
-                } 
-                
-            } 
+                }
+            }
             Errors.handle(error);
         }
     },

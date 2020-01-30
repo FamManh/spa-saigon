@@ -110,18 +110,19 @@ shiftSchema.statics = {
    * @param {number} limit - Limit number of shifts to be returned.
    * @returns {Promise<Shift[]>}
    */
-  list({ branch, date }) {
+  list({ branch, start, end }) {
     const options = omitBy({ branch }, isNil);
-    date = Number(date);
+    start = Number(start);
+    end = Number(end);
     return this.find({
       $and: [
         {
           date: {
-            $gte: moment(date)
-              .startOf("month")
+            $gte: moment(start)
+              .startOf("day")
               .toDate(),
-            $lte: moment(date)
-              .endOf("month")
+            $lte: moment(end)
+              .endOf("day")
               .toDate()
           }
         },

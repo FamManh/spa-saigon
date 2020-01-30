@@ -61,16 +61,26 @@ const Menu = ({ url }) => {
                     mode="inline"
                     selectedKeys={selectedKeys}
                 >
-                    {routes.privateRoutes
-                        .filter(privateRoute => !!privateRoute.menu)
-                        .map(route => (
-                            <AntMenu.Item key={route.path}>
-                                <Link to={route.path}>
-                                    <Icon type={route.icon} />
-                                    <span>{route.label}</span>
-                                </Link>
-                            </AntMenu.Item>
-                        ))}
+                        {routes.privateRoutes
+                            .filter(privateRoute => !!privateRoute.menu)
+                            .map(route => (
+                                <AntMenu.Item key={route.path}>
+                                    <Link to={route.path}>
+                                        <Icon type={route.icon} />
+                                        <span>{route.label}</span>
+                                    </Link>
+                                </AntMenu.Item>
+                            ))}
+                        {routes.publicRoutes
+                            .filter(publicRoute => !!publicRoute.menu)
+                            .map(route => (
+                                <AntMenu.Item key={route.path}>
+                                    <Link to={route.path}>
+                                        <Icon type={route.icon} />
+                                        <span>{route.label}</span>
+                                    </Link>
+                                </AntMenu.Item>
+                            ))}
                 </AntMenu>
             </Sider>
         </SiderWrapper>

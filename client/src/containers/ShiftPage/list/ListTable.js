@@ -21,21 +21,26 @@ const ListTable = () => {
         {
             title: "Thời gian",
             dataIndex: "date",
-            sorter: (a, b) => a.date.length - b.date.length,
-            render: (text, row, index)=>{
-            return (
-                <Link to={`/ledger/${row.id}`}>
-                    {moment(text).format("YYYY-MM-DD") + '   '} 
-                    {row.lock ? <Icon type="lock"/> : null}
-                </Link>
-            );
-            }
+            key: "date",
+
+            render: (text, row, index) => {
+                return (
+                    <Link to={`/ledger/${row.id}`}>
+                        {moment(text).format("YYYY-MM-DD") + "   "}
+                        {row.lock ? <Icon type="lock" /> : null}
+                    </Link>
+                );
+            },
+            sorter: (a, b) => moment(a.date).unix() - moment(b.date).unix(),
+            defaultSortOrder: "descend"
         },
         {
             title: "Chi nhánh",
             dataIndex: "branch.name",
             key: "branch.name",
-            sorter: (a, b) => a.branch.name.length - b.branch.name.length
+            sorter: (a, b) => {
+                return a.branch.name.localeCompare(b.branch.name);
+            }
         },
         {
             title: "Tiền mặt",

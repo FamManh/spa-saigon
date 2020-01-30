@@ -20,7 +20,10 @@ module.exports = {
         .valid(typesReport)
         .required(),
       branch: Joi.string().regex(/^[a-fA-F0-9]{24}$/),
-      date: Joi.date()
+      start: Joi.date()
+        .timestamp()
+        .required(),
+      start: Joi.date()
         .timestamp()
         .required()
     }

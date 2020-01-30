@@ -2,8 +2,6 @@ import sgapi from "../../api/sgapi";
 
 const services = {
     listFn: async ({date, branch}) => {
-        console.log(date);
-        console.log(branch);
         const response = await sgapi.get(
             `/ledger/info?branch=${branch}&date=${date}`
         );

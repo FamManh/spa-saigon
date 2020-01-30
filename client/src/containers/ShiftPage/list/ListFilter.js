@@ -8,15 +8,20 @@ import FilterWrapper, {
 } from "../../shared/styles/FilterWrapper";
 import moment from 'moment';
 import { useSelector, useDispatch } from "react-redux";
+import selectors from "../selectors";
 const {Option} = Select;
 const { MonthPicker } = DatePicker;
 const monthFormat = "YYYY/MM";
 const ListFilter = ({ form }) => {
     const dispatch = useDispatch();
     const branchs = useSelector(branchSelectors.selectBranchs);
-
+    const filter = useSelector(selectors.selectFilter)
     let doSubmit = values => {
-        dispatch(actions.list({...values, date: moment(values.date).format('x')}));
+        let start = moment(values.date).startOf("month").format('x');
+        let end =  moment(values.date).endOf("month").format('x');
+        dispatch(actions.doFilterChange(values));
+        dispatch(actions.list({...values, start, end}));
+
     };
 
     useEffect(() => {
@@ -40,22 +45,34 @@ const ListFilter = ({ form }) => {
                     <Col md={24} lg={12}>
                         <Form.Item label="Thời gian">
                             {form.getFieldDecorator("date", {
-                                initialValue: moment(new Date(), monthFormat),
+                                initialValue:
+                                    filter && filter.date ? filter.date : null,
                                 rules: [
                                     {
                                         required: true,
                                         message: "Vui lòng chọn thời gian"
                                     }
                                 ]
-                            })(<MonthPicker placeholder="Chọn tháng" allowClear={false}/>)}
+                            })(
+                                <MonthPicker
+                                    placeholder="Chọn tháng"
+                                    allowClear={false}
+                                />
+                            )}
                         </Form.Item>
                     </Col>
                     <Col md={24} lg={12}>
                         <Form.Item label="Chi nhánh">
                             {form.getFieldDecorator("branch", {
-                                // initialValue: branchs && branchs[0] ? branchs[0].id : null
+                                initialValue:
+                                    filter && filter.branch
+                                        ? filter.branch
+                                        : null
                             })(
-                                <Select placeholder="Chọn chi nhánh" allowClear={true}>
+                                <Select
+                                    placeholder="Chọn chi nhánh"
+                                    allowClear={true}
+                                >
                                     {branchs.map((branch, key) => (
                                         <Option
                                             key={branch.id}

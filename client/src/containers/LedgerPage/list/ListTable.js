@@ -44,7 +44,9 @@ const ListTable = () => {
             render: (_, record) => {
                 return record.flag ? <Text type="danger">{_}</Text> : _;
             },
-            sorter: (a, b) => a.vnname.length - b.vnname.length
+            sorter: (a, b) => {
+                return a.vnname.localeCompare(b.vnname);
+            }
         },
         {
             title: "Tiền mặt",
@@ -62,14 +64,17 @@ const ListTable = () => {
             title: "Nhân viên",
             dataIndex: "staff.name",
             key: "staff.name",
-            sorter: (a, b) => a.staff.name.length - b.staff.name.length
+            sorter: (a, b) => {
+                return a.staff.name.localeCompare(b.staff.name);
+            }
         },
         {
             title: "Người cộng",
             dataIndex: "createdBy.username",
             key: "createdBy.username",
-            sorter: (a, b) =>
-                a.createdBy.username.length - b.createdBy.username.length
+            sorter: (a, b) => {
+                return a.createdBy.username.localeCompare(b.createdBy.username);
+            }
         },
         {
             title: "",

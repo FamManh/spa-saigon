@@ -30,7 +30,9 @@ const ListTable = () => {
             title: "Nhân viên",
             dataIndex: "_id.name",
             key: "_id.name",
-            sorter: (a, b) => a._id.name.length - b._id.name.length
+            sorter: (a, b) => {
+                return a._id.name.localeCompare(b._id.name);
+            }
         },
         {
             title: "Tổng tiền",
@@ -71,9 +73,6 @@ const ListTable = () => {
     const rowSelection = {
         selectedRowKeys,
         onChange: (_selectedRowKeys, _selectedRows) => {
-            console.log(_selectedRowKeys);
-            console.log(_selectedRows);
-
             dispatch(
                 actions.doTableRowSelection(_selectedRowKeys, _selectedRows)
             );

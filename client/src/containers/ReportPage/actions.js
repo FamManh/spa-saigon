@@ -10,7 +10,8 @@ import {
     REPORT_EXPORT_ERROR,
     REPORT_ERROR_MESSAGE_CLEAR,
     REPORT_TABLE_ROW_SELECTION,
-    REPORT_TABLE_ROW_CLICK
+    REPORT_TABLE_ROW_CLICK,
+    REPORT_FILTER_CHANGE
 } from "./constants";
 import Errors from "../shared/error/errors";
 import services from "./service";
@@ -31,6 +32,13 @@ const actions = {
         return { type: REPORT_ERROR_MESSAGE_CLEAR };
     },
 
+    doFilterChange: data => {
+        return {
+            type: REPORT_FILTER_CHANGE,
+            payload: data
+        };
+    },
+
     list: (filter, branchs) => async dispatch => {
         try {
             dispatch({ type: REPORT_GET_START });
@@ -38,7 +46,8 @@ const actions = {
                 let reportData = [];
                 let currentBranch = filter.branch;
                 let reportAllBranch = await services.reportFn({
-                    date: filter.date,
+                    start: filter.start,
+                    end: filter.end,
                     type: filter.type
                 });
                 reportAllBranch.data.forEach(item => {
@@ -76,7 +85,6 @@ const actions = {
                     });
                     reportData.push(tempItem);
                 });
-                console.log(reportData);
                 dispatch({
                     type: REPORT_GET_SUCCESS,
                     payload: reportData
@@ -106,14 +114,6 @@ const actions = {
                 let response = await services.reportFn(filter);
                 dispatch({ type: REPORT_GET_SUCCESS, payload: response.data });
             }
-            let cars = [
-                { make: "audi", model: "r8", year: "2012" },
-                { make: "audi", model: "rs5", year: "2013" },
-                { make: "ford", model: "mustang", year: "2012" },
-                { make: "ford", model: "fusion", year: "2015" },
-                { make: "kia", model: "optima", year: "2012" }
-            ];
-            console.log(groupBy(cars, "make"));
         } catch (error) {
             Errors.handle(error);
             dispatch({

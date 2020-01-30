@@ -45,6 +45,10 @@ const selectSumCertificateSelectedRow = createSelector(
     ledger => ledger.sumCertificateSelectedRow
 );
 
+const selectFilter = createSelector([selectRaw], ledger => ledger.filter);
+
+
+
 const selectors = {
     selectDataLoading,
     selectReports,
@@ -56,7 +60,8 @@ const selectors = {
     selectSumCash,
     selectSumCertificate,
     selectSumCashSelectedRow,
-    selectSumCertificateSelectedRow
+    selectSumCertificateSelectedRow,
+    selectFilter
 };
 
 export default selectors;

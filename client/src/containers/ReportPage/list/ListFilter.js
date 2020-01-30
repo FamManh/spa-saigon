@@ -10,17 +10,30 @@ import moment from 'moment';
 import { useSelector, useDispatch } from "react-redux";
 import selectors from "../selectors";
 const {Option} = Select;
-const { MonthPicker } = DatePicker;
+const { MonthPicker, RangePicker } = DatePicker;
 const monthFormat = "YYYY/MM";
+const dateFormat = "YYYY/MM/DD";
 const ListFilter = ({ form }) => {
     const dispatch = useDispatch();
     const branchs = useSelector(branchSelectors.selectBranchs);
     const dataLoading = useSelector(selectors.selectDataLoading);
+    const filter = useSelector(selectors.selectFilter);
 
     let doSubmit = values => {
+        let start = values.date[0];
+        let end = values.date[1];
+        dispatch(
+            actions.doFilterChange({
+                start,
+                end,
+                flag: values.flag,
+                groupByBranch: values.groupByBranch,
+                branch: values.branch
+                })
+        );
         dispatch(
             actions.list(
-                { ...values, date: moment(values.date).format("x") },
+                { ...values, start: start.format("x"), end: end.format("x") },
                 branchs
             )
         );
@@ -47,27 +60,34 @@ const ListFilter = ({ form }) => {
                     <Col md={24} lg={12}>
                         <Form.Item label="Thời gian">
                             {form.getFieldDecorator("date", {
-                                initialValue: moment(new Date(), monthFormat),
+                                initialValue:
+                                    filter && filter.start && filter.end
+                                        ? [filter.start, filter.end]
+                                        : null,
                                 rules: [
                                     {
+                                        type: "array",
                                         required: true,
                                         message: "Vui lòng chọn thời gian"
                                     }
                                 ]
                             })(
-                                <MonthPicker
-                                    style={{ width: "100%" }}
-                                    placeholder="Chọn tháng"
-                                    allowClear={false}
-                                />
+                                <RangePicker />
+                                // <MonthPicker
+                                //     style={{ width: "100%" }}
+                                //     placeholder="Chọn tháng"
+                                //     allowClear={false}
+                                // />
                             )}
                         </Form.Item>
                     </Col>
                     <Col md={24} lg={12}>
                         <Form.Item label="Chi nhánh">
                             {form.getFieldDecorator("branch", {
-                                initialValue: null
-                                // branchs && branchs[0] ? branchs[0].id : null
+                                initialValue:
+                                    filter && filter.branch
+                                        ? filter.branch
+                                        : null
                             })(
                                 <Select
                                     placeholder="Chọn chi nhánh"
@@ -110,11 +130,16 @@ const ListFilter = ({ form }) => {
                 <Row>
                     <Col className="filter-buttons" span={24}>
                         {form.getFieldDecorator("flag", {
-                            initialValue: false,
+                            initialValue:
+                                filter && filter.flag ? filter.flag : null,
                             valuePropName: "checked"
                         })(<Checkbox>Flag</Checkbox>)}
                         {form.getFieldDecorator("groupByBranch", {
-                            initialValue: false,
+                            initialValue:
+                                filter && filter.groupByBranch
+                                    ? filter.groupByBranch
+                                    : null,
+
                             valuePropName: "checked"
                         })(<Checkbox>Gộp chi nhánh</Checkbox>)}
                         <Button
