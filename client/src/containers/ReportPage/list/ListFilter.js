@@ -1,15 +1,15 @@
 import { Button, Col, Form, Row, DatePicker, Select, Checkbox } from "antd";
 import actions from "../actions";
-import branchSelectors from '../../BranchPage/selectors';
-import branchActions from '../../BranchPage/actions';
+import branchSelectors from "../../BranchPage/selectors";
+import branchActions from "../../BranchPage/actions";
 import React, { useEffect } from "react";
 import FilterWrapper, {
     formItemLayout
 } from "../../shared/styles/FilterWrapper";
-import moment from 'moment';
+import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import selectors from "../selectors";
-const {Option} = Select;
+const { Option } = Select;
 const { MonthPicker, RangePicker } = DatePicker;
 const monthFormat = "YYYY/MM";
 const dateFormat = "YYYY/MM/DD";
@@ -22,6 +22,7 @@ const ListFilter = ({ form }) => {
     let doSubmit = values => {
         let start = values.date[0];
         let end = values.date[1];
+
         dispatch(
             actions.doFilterChange({
                 start,
@@ -29,11 +30,15 @@ const ListFilter = ({ form }) => {
                 flag: values.flag,
                 groupByBranch: values.groupByBranch,
                 branch: values.branch
-                })
+            })
         );
         dispatch(
             actions.list(
-                { ...values, start: start.format("x"), end: end.format("x") },
+                {
+                    ...values,
+                    start: start.format("x"),
+                    end: end.format("x")
+                },
                 branchs
             )
         );

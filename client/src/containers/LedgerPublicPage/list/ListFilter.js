@@ -25,6 +25,18 @@ const ListFilter = ({ form }) => {
         );
     };
 
+    let disabledDate = current => {
+        // Can not select days last month and next month
+        return (
+            (current &&
+                current >
+                    moment()
+                        .endOf("month")
+                        .subtract(1, "day")) ||
+            (current && current < moment().startOf("month"))
+        );
+    };
+
     useEffect(() => {
         dispatch(branchActions.list());
     }, []);
@@ -55,6 +67,7 @@ const ListFilter = ({ form }) => {
                                 ]
                             })(
                                 <DatePicker
+                                    disabledDate={disabledDate}
                                     style={{ width: "100%" }}
                                     placeholder="Chọn ngày"
                                     allowClear={false}

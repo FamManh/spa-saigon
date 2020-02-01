@@ -132,6 +132,15 @@ const ledgerReducer = (state = initialState, { type, payload }) =>
                         draft.ledgers[key] = payload;
                     }
                 })
+                draft.selectedRowKeys = [];
+                draft.selectedRows = [];
+                draft.sumCashSelectedRow = 0;
+                draft.sumCertificateSelectedRow = 0;
+                draft.sumCash = calculateFields(draft.ledgers, "cash");
+                draft.sumCertificate = calculateFields(
+                    draft.ledgers,
+                    "certificate"
+                );
                 break;
             case LEDGER_UPDATE_ERROR:
                 draft.saveLoading = false;

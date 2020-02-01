@@ -114,6 +114,7 @@ shiftSchema.statics = {
     const options = omitBy({ branch }, isNil);
     start = Number(start);
     end = Number(end);
+
     return this.find({
       $and: [
         {
