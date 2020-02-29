@@ -223,6 +223,15 @@ const authRoutes = [
 ];
 
 const publicRoutes = [
+     {
+        path: "/salary",
+        exact: true,
+        loader: () => import("./Salary/index"),
+        menu: true,
+        label: "Lương",
+        permissionRequired: null,
+        icon: "calculator"
+    },
     {
         path: "/spa",
         exact: true,
@@ -231,7 +240,8 @@ const publicRoutes = [
         label: "Tua",
         permissionRequired: null,
         icon: "sliders"
-    }
+    },
+   
 ];
 
 const errorRoutes = [
