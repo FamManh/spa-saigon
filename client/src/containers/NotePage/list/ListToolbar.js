@@ -11,11 +11,6 @@ const  ListToolbar = () => {
     const dispatch = useDispatch();
     const [note, setNote] = useState("")
 
-
-
- 
-
-   
     // const onReload = () => {
     //     dispatch(actions.list());
     // }
@@ -23,6 +18,7 @@ const  ListToolbar = () => {
     const onSubmit = (event)=>{
         event.preventDefault();
         dispatch(actions.doCreate({ content: note }));
+        setNote("");
     }
 
     return (
