@@ -1,30 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Form, Input, Button, Checkbox } from "antd";
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-// moment.locale("en");
+import Icon from "@ant-design/icons";
+import { Row, Col, Form, Input, Button, Checkbox, Collapse } from "antd";
 
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    console.log("Min: ", min, " max: " + max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-let gererateQrCodeText = (
-    date,
-    time,
-    price,
-    fn = "9289000100616591",
-    i = "56409",
-    fp = "3342018027"
-) => {
-    let text = `t=${date.split(".").join("")}t${time
-        .split(":")
-        .join("")}&s=${price.replace(",", ".")}&fn=${fn}&i=${i}&fp=${fp}&n=1`;
-    return text.replace(" ", "");
-};
+import {ChevronRight} from 'react-feather';
+import pdfMakeCus from "./pdfMakeCus";
+import { getRandomInt, gererateQrCodeText } from "./helpers";
+const { Panel } = Collapse;
 
 const TaxiInvoice = ({ form }) => {
     const [iframeDataUrl, setIframeDataUrl] = useState("");
@@ -379,177 +360,169 @@ const TaxiInvoice = ({ form }) => {
         },
         { text: "Сайт ФНС: nalog.ru", margin: [0, 10, 0, 0] }
     ];
-    const renderPDF = () => {
-        pdfMake.fonts = {
-            dvs: {
-                normal: "DejaVuSansMono.ttf",
-                bold: "DejaVuSansMono-Bold.ttf",
-                italics: "DejaVuSansMono-Oblique.ttf",
-                bolditalics: "DejaVuSansMono-BoldOblique.ttf"
+
+    const renderPDF = async () => {
+        console.log("render");
+        let pageSize = {
+            width: 620.2,
+            height: "auto"
+        };
+        let pageMargins = [57.6, 48, 57.6, 48]; // left top right bottom
+        let styles = {
+            pageHeaderNormal: {
+                fontSize: 12,
+                margin: [0, 3, 0, 3]
+            },
+            pageHeaderBold: {
+                fontSize: 18,
+                bold: true,
+                margin: [0, 5, 0, 10]
+            },
+            header: {
+                fontSize: 10,
+                bold: true,
+                margin: [0, 0, 0, 10]
+            },
+            subheader: {
+                fontSize: 10,
+                bold: true,
+                margin: [0, 10, 0, 5]
+            },
+            paragraph: {
+                margin: [0, 5, 0, 5]
+            },
+            paragraphBold: {
+                margin: [0, 5, 0, 5],
+                bold: true
+            },
+            table: {
+                margin: [0, 15, 0, 15]
+            },
+            tableHeader: {
+                fontSize: 10,
+                color: "black"
             }
         };
-
-        let dd = {
-            pageSize: {
-                width: 620.2,
-                height: "auto"
-            },
-            pageMargins: [57.6, 48, 57.6, 48], // left top right bottom
-            content: [
-                header,
-                sectionOne,
-                {
-                    canvas: [
-                        {
-                            type: "line",
-                            x1: 0,
-                            y1: 5,
-                            x2: 595 - 2 * 40,
-                            y2: 5,
-                            dash: {
-                                length: 1,
-                                space: 1
-                            }
-                        }
-                    ]
-                },
-                sectionTwo,
-                {
-                    canvas: [
-                        {
-                            type: "line",
-                            x1: 0,
-                            y1: 5,
-                            x2: 595 - 2 * 40,
-                            y2: 5,
-                            dash: {
-                                length: 1,
-                                space: 1
-                            }
-                        }
-                    ]
-                },
-                sectionThree,
-                {
-                    canvas: [
-                        {
-                            type: "line",
-                            x1: 0,
-                            y1: 10,
-                            x2: 595 - 2 * 40,
-                            y2: 10,
-                            dash: {
-                                length: 1,
-                                space: 1
-                            }
-                        }
-                    ]
-                },
-                sectionFour,
-                {
-                    canvas: [
-                        {
-                            type: "line",
-                            x1: 0,
-                            y1: 10,
-                            x2: 595 - 2 * 40,
-                            y2: 10,
-                            dash: {
-                                length: 1,
-                                space: 1
-                            }
-                        }
-                    ]
-                },
-                {
-                    qr: gererateQrCodeText(date, time, price),
-                    alignment: "center",
-                    margin: [0, 15, 0, 15]
-                },
-                {
-                    canvas: [
-                        {
-                            type: "line",
-                            x1: 0,
-                            y1: 10,
-                            x2: 595 - 2 * 40,
-                            y2: 10,
-                            dash: {
-                                length: 1,
-                                space: 1
-                            }
-                        }
-                    ]
-                },
-                sectionFive
-            ],
-            styles: {
-                pageHeaderNormal: {
-                    fontSize: 12,
-                    margin: [0, 3, 0, 3]
-                },
-                pageHeaderBold: {
-                    fontSize: 18,
-                    bold: true,
-                    margin: [0, 5, 0, 10]
-                },
-                header: {
-                    fontSize: 10,
-                    bold: true,
-                    margin: [0, 0, 0, 10]
-                },
-                subheader: {
-                    fontSize: 10,
-                    bold: true,
-                    margin: [0, 10, 0, 5]
-                },
-                paragraph: {
-                    margin: [0, 5, 0, 5]
-                },
-                paragraphBold: {
-                    margin: [0, 5, 0, 5],
-                    bold: true
-                },
-                table: {
-                    margin: [0, 15, 0, 15]
-                },
-                tableHeader: {
-                    fontSize: 10,
-                    color: "black"
-                }
-            },
-            defaultStyle: {
-                font: "dvs"
-            }
+        let defaultStyle = {
+            font: "dvs"
         };
 
-        // // generate pdf
+        let content = [
+            header,
+            sectionOne,
+            {
+                canvas: [
+                    {
+                        type: "line",
+                        x1: 0,
+                        y1: 5,
+                        x2: 595 - 2 * 40,
+                        y2: 5,
+                        dash: {
+                            length: 1,
+                            space: 1
+                        }
+                    }
+                ]
+            },
+            sectionTwo,
+            {
+                canvas: [
+                    {
+                        type: "line",
+                        x1: 0,
+                        y1: 5,
+                        x2: 595 - 2 * 40,
+                        y2: 5,
+                        dash: {
+                            length: 1,
+                            space: 1
+                        }
+                    }
+                ]
+            },
+            sectionThree,
+            {
+                canvas: [
+                    {
+                        type: "line",
+                        x1: 0,
+                        y1: 10,
+                        x2: 595 - 2 * 40,
+                        y2: 10,
+                        dash: {
+                            length: 1,
+                            space: 1
+                        }
+                    }
+                ]
+            },
+            sectionFour,
+            {
+                canvas: [
+                    {
+                        type: "line",
+                        x1: 0,
+                        y1: 10,
+                        x2: 595 - 2 * 40,
+                        y2: 10,
+                        dash: {
+                            length: 1,
+                            space: 1
+                        }
+                    }
+                ]
+            },
+            {
+                qr: gererateQrCodeText(date, time, price),
+                alignment: "center",
+                margin: [0, 15, 0, 15]
+            },
+            {
+                canvas: [
+                    {
+                        type: "line",
+                        x1: 0,
+                        y1: 10,
+                        x2: 595 - 2 * 40,
+                        y2: 10,
+                        dash: {
+                            length: 1,
+                            space: 1
+                        }
+                    }
+                ]
+            },
+            sectionFive
+        ];
+
+        let pdfGen = new pdfMakeCus(
+            pageSize,
+            pageMargins,
+            styles,
+            defaultStyle
+        );
+        let pdfDocGenerator = await pdfGen.renderPDF(content, date, print);
         if (print) {
-            setIframeDataUrl(null);
-            pdfMake.createPdf(dd).download(date + ".pdf");
-        }else{
-            const pdfDocGenerator = pdfMake.createPdf(dd);
+            pdfDocGenerator.download(date + ".pdf");
+        } else {
             pdfDocGenerator.getDataUrl(dataUrl => {
                 setIframeDataUrl(dataUrl);
             });
         }
-        
-        // generate pdf
-        
     };
+
     useEffect(() => {
         setShift(getRandomInt(number - 30, number + 100));
         return () => {};
     }, [number]);
-    useEffect(() => {
-        renderPDF();
-        return () => {};
-    }, [shift]);
+
     let handleSubmit = ({ date, time, price, phone }) => {
         setDate(date);
         setTime(time);
         setPrice(price);
         setPhone(phone);
+        renderPDF();
         setNumber(getRandomInt(50, 900));
     };
     return (
@@ -566,7 +539,15 @@ const TaxiInvoice = ({ form }) => {
                         ></iframe>
                     )}
                 </Col>
-                <Col span={6} pull={18} style={{ padding: "20px 10px" }}>
+                <Col
+                    span={6}
+                    pull={18}
+                    style={{
+                        padding: "20px 10px",
+                        height: "100vh",
+                        overflowY: "scroll"
+                    }}
+                >
                     <Form
                         onSubmit={e => {
                             e.preventDefault();
@@ -613,19 +594,45 @@ const TaxiInvoice = ({ form }) => {
                                 ]
                             })(<Input />)}
                         </Form.Item>
-                        <Form.Item label="Số điện thoại">
-                            {form.getFieldDecorator("phone", {
-                                initialValue: phone,
-                                rules: [
-                                    {
-                                        type: "string",
-                                        required: true,
-                                        message: "Vui lòng chọn sdt"
-                                    }
-                                ]
-                            })(<Input />)}
-                        </Form.Item>
-
+                        <Collapse
+                            bordered={false}
+                            expandIcon={({ isActive }) => (
+                                <ChevronRight
+                                    rotate={isActive ? 90 : 0}
+                                />
+                            )}
+                            style={{ marginBottom: "10px" }}
+                            className="site-collapse-custom-collapse"
+                        >
+                            <Panel
+                                header="Tham số"
+                                key="1"
+                                className="site-collapse-custom-panel"
+                            >
+                                <Form.Item label="Số">
+                                    {form.getFieldDecorator("number", {
+                                        initialValue: number
+                                    })(<Input />)}
+                                </Form.Item>
+                                <Form.Item label="Ca số">
+                                    {form.getFieldDecorator("shift", {
+                                        initialValue: shift
+                                    })(<Input />)}
+                                </Form.Item>
+                                <Form.Item label="Số điện thoại">
+                                    {form.getFieldDecorator("phone", {
+                                        initialValue: phone,
+                                        rules: [
+                                            {
+                                                type: "string",
+                                                required: true,
+                                                message: "Vui lòng chọn sdt"
+                                            }
+                                        ]
+                                    })(<Input />)}
+                                </Form.Item>
+                            </Panel>
+                        </Collapse>
                         <Button icon="search" type="primary" htmlType="submit">
                             Tạo hóa đơn
                         </Button>
@@ -636,7 +643,10 @@ const TaxiInvoice = ({ form }) => {
                         >
                             Print
                         </Checkbox>
-                        <p>* Lưu ý: Chọn chế độ print sẽ hiện thị kết quả xem trước</p>
+                        <p>
+                            * Lưu ý: Chọn chế độ print sẽ hiện thị kết quả xem
+                            trước
+                        </p>
                     </Form>
                 </Col>
             </Row>
