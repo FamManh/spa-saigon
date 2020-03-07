@@ -240,24 +240,6 @@ const publicRoutes = [
         label: "Tua",
         permissionRequired: null,
         icon: "sliders"
-    },
-    {
-        path: "/taxiinvoice",
-        exact: true,
-        loader: () => import("./InvoicePage/TaxiInvoice"),
-        menu: false,
-        label: "Lương",
-        permissionRequired: null,
-        icon: "calculator"
-    },
-    {
-        path: "/internet",
-        exact: true,
-        loader: () => import("./InvoicePage/InternetSberbankInvoice"),
-        menu: false,
-        label: "Lương",
-        permissionRequired: null,
-        icon: "calculator"
     }
 ];
 
