@@ -4834,8 +4834,8 @@ supports-color@^6.1.0:
     has-flag "^3.0.0"
 
 systeminformation@^4.14.16:
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-4.16.0.tgz#d92ce821efdab720496c60656bf65cc68fb03f8c"
+  version "4.34.13"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-4.34.13.tgz#4d6bdf451369aa137e7b445bf700ba5b82dd6fa0"
 
 table@^5.2.3:
   version "5.4.6"
